@@ -54,6 +54,9 @@ Baddies *baddies;
 
         //draw baddies (will need to change this to be more dynamic)
         baddies = [[Baddies alloc] init];
+        
+        
+        
         [baddies addBaddie];
         [self addChild:baddies];
         
