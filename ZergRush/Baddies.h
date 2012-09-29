@@ -7,4 +7,7 @@
 
 -(id) init;
 -(void) addBaddie;
+-(int) count;
+-(Baddie *) getBaddie: (int) index;
+-(void) removeBaddie: (id) baddie;
 @end

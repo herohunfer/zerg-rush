@@ -50,4 +50,8 @@
     return index;
 }
 
+-(CGRect) getBoundingBox {
+    return baddie.boundingBox;
+}
+
 @end

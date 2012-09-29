@@ -7,4 +7,5 @@
 
 -(id) init:(int) xcoord:(int) ycoord;
 -(int) getNearestBunker:(Bunkers*) bunkers;
+-(CGRect) getBoundingBox;
 @end
