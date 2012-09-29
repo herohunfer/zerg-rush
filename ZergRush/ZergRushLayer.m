@@ -125,7 +125,15 @@ int bossBase = 300;
         {
             //bunker.visible = NO; //Make your sprite invisible
             if ([baddie reduceHealth] <= 0)
+            {
+                int str = [baddie getStrength];
+                if (str == 1) {
+                    CGPoint pos = [baddie getPosition];
+                    [baddies addBaddieWithPosition:(pos.x - 30) :(pos.y-10) :0];
+                    [baddies addBaddieWithPosition:(pos.x + 30) :(pos.y+10) :0];
+                }
                 [baddies removeBaddie:baddie];
+            }
             else [baddie showHealth];
             // break;
         }

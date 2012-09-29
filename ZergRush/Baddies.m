@@ -32,6 +32,16 @@
     [baddies addObject:baddie];
 }
 
+
+-(void) addBaddieWithPosition:(int)xCoor :(int)yCoor :(int)str{
+    Baddie *baddie;
+    baddie = [[Baddie alloc] init:xCoor :yCoor :str];
+    [self addChild:baddie];
+    [baddies addObject:baddie];
+    
+}
+
+
 -(void) draw {
     for (int i=0; i < [baddies count]; i++) {
         
