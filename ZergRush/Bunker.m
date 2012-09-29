@@ -18,9 +18,15 @@
     return self;
 }
 
+-(CCSprite*) getBunker {
+    return bunker;
+}
+
+
 -(CGRect) getBoundingBox {
     return bunker.boundingBox;
 }
+
 
 -(int) getx {
     return bunker.position.x;

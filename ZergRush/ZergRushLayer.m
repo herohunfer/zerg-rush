@@ -21,6 +21,7 @@
 
 Bunkers *bunkers;
 Baddies *baddies;
+Boolean isEnd = false;
 
 // ZergRushLayer implementation
 @implementation ZergRushLayer
@@ -122,46 +123,72 @@ Baddies *baddies;
 
 - (void) nextFrame:(ccTime)dt {
     // loop through all the baddies
+    if (!isEnd)
+    {
     for (int i = 0; i < [baddies count]; i++) {
         Baddie *currentBaddie = [baddies getBaddie:i];
-        Bunker *nearestbunker = [bunkers getBunker:0];
-        
-        //int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
-        //Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
-        
-        int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
-        int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
-        double angle = atan2(yDiff, xDiff);
-        
-        CGPoint newPosition = ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle));
-        //check if newPosition is inside a bunker
-        for (int j=0; j < [bunkers count]; j++) {
-            Bunker *bunker = [bunkers getBunker:j];
-            CGRect bbox = [bunker getBoundingBox];
-            bbox.origin.x -= 7.5;
-            bbox.origin.y -= 7.5;
-            bbox.size.width += 15;
-            bbox.size.height += 15;
+        //Bunker *nearestbunker = [bunkers getBunker:0];
 
-            if (CGRectContainsPoint(bbox, newPosition)) {
-                int direction = [bunker getWhichSideOfBunker:newPosition];
-                if (direction == 1 || direction == 3) {
-                    newPosition = ccp([currentBaddie getx]+1, [currentBaddie gety]);
-                }
-                else if (direction == 2 || direction == 4) {
-                    newPosition = ccp([currentBaddie getx], [currentBaddie gety]-1);
-                }
-                else {
-                    newPosition = ccp(0, 0);
-                }
-                break;
-            }
+        int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
+        if (NearestBunkerIndex < 0)
+            isEnd = true;
+        else {
+            Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
+            
+            int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
+            int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
+            double angle = atan2(yDiff, xDiff);
+            
+            [currentBaddie setPosition :ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle))];
+            [baddies replace:i :currentBaddie];
+            if ([currentBaddie hasReachedTarget:nearestbunker] == true)
+                [nearestbunker getBunker].visible = false;
         }
-        
-        [currentBaddie setPosition :newPosition];
-        [baddies replace:i :currentBaddie];
-        if ([currentBaddie hasReachedTarget:nearestbunker] == true)
-            nearestbunker.visible = false;
     }
+    }
+    
+    else
+    {
+    for (int i = 0; i < [baddies count]; i++) {
+         Baddie *currentBaddie = [baddies getBaddie:i];
+    //all gone. game end. Empty the baddies.
+        switch (i) {
+            case 0:
+                [currentBaddie setPosition :ccp(130, 210)];
+                break;
+            case 1:
+                [currentBaddie setPosition :ccp(120, 240)];
+                break;
+            case 2:
+                [currentBaddie setPosition :ccp(130, 270)];
+                break;
+            case 3:
+                [currentBaddie setPosition :ccp(160, 300)];
+                break;
+            case 4:
+                [currentBaddie setPosition :ccp(220, 300)];
+                break;
+            case 5:
+                [currentBaddie setPosition :ccp(220, 210)];
+                break;
+            case 6:
+                [currentBaddie setPosition :ccp(220, 240)];
+                break;
+            case 7:
+                [currentBaddie setPosition :ccp(190, 240)];
+                break;
+            case 8:
+                [currentBaddie setPosition :ccp(200, 180)];
+                break;
+            case 9:
+                [currentBaddie setPosition :ccp(160, 180)];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    }
+     
 }
 @end

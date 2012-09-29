@@ -17,7 +17,7 @@
  */
 
 -(boolean_t) hasReachedTarget: (Bunker*) target {
-    CGPoint pos = [target position];
+    CGPoint pos = [target getPosition];
     
     return  (baddie.position.x >= pos.x &&
             baddie.position.y >= pos.y &&
@@ -27,25 +27,28 @@
 }
 
 -(int) getNearestBunker: (Bunkers*) bunkers {
-    double shortestDistance;
-    int index;
+    double shortestDistance = 723;
+    int index = -1;
     
     for (int i=0; i < [bunkers count]; i++) {
         Bunker *cBunker = [bunkers getBunker:i];
-        int bunkerX = [cBunker getx];
-        int bunkerY = [cBunker gety];
+        if ([cBunker getBunker].visible)
+            {
+                int bunkerX = [cBunker getx];
+                int bunkerY = [cBunker gety];
     
-        int baddieX = baddie.position.x;
-        int baddieY = baddie.position.y;
+                int baddieX = baddie.position.x;
+                int baddieY = baddie.position.y;
         
-        int dx = bunkerX - baddieX;
-        int dy = bunkerY - baddieY;
+                int dx = bunkerX - baddieX;
+                int dy = bunkerY - baddieY;
         
-        double distance = sqrt(dx*dx + dy*dy);
-        if (distance < shortestDistance) {
-            shortestDistance = distance;
-            index = i;
-        }
+                double distance = sqrtf(dx*dx + dy*dy);
+                if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                    index = i;
+                }
+            }
     }
     return index;
 }

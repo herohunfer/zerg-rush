@@ -11,4 +11,5 @@
 -(void) removeBaddie: (id) baddie;
 -(Baddie *) getBaddie: (int) index;
 -(void) replace:(int) i: (Baddie*) newbaddie;
+
 @end

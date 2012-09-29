@@ -20,4 +20,6 @@
 -(int) gety;
 -(CGPoint) getPosition;
 -(int) getWhichSideOfBunker:(CGPoint) p;
+-(CCSprite*) getBunker;
+
 @end
