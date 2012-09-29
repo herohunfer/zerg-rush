@@ -90,7 +90,9 @@ Boolean isEnd = false;
         if (CGRectContainsPoint([baddie getBoundingBox], ccPos)) //Method to check if a rectangle contains a point
         {
             //bunker.visible = NO; //Make your sprite invisible
-            [baddies removeBaddie:baddie];
+            if ([baddie reduceHealth] <= 0)
+                [baddies removeBaddie:baddie];
+            else [baddie showHealth];
             break;
         }
     }
@@ -122,7 +124,7 @@ Boolean isEnd = false;
 }
 
 - (void) nextFrame:(ccTime)dt {
-    if ([baddies count] < 20) {
+    if ([baddies count] < 5) {
     [baddies addBaddie];
     }
     
@@ -153,12 +155,20 @@ Boolean isEnd = false;
     
     else
     {
+        while ([baddies count] > 0) {
+            int i = [baddies count] -1;
+            [baddies removeBaddie:[baddies getBaddie:i]];
+        }
         while ([baddies count] < 20) 
             [baddies addBaddie];
         
     for (int i = 0; i < [baddies count]; i++) {
          Baddie *currentBaddie = [baddies getBaddie:i];
     //all gone. game end. Empty the baddies.
+        if ((i / 10) == 1)
+        {
+            [currentBaddie showHealth];
+        }
         switch (i) {
             case 0:
                 [currentBaddie setPosition :ccp(40, 210)];

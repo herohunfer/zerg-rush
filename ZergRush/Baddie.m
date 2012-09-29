@@ -7,6 +7,7 @@
         baddie = [CCSprite spriteWithFile: @"baddie.png"];
         baddie.position = ccp(xcoord, ycoord);
         [self addChild:baddie];
+        health = 2;
     }
     return self;
 }
@@ -51,6 +52,13 @@
             }
     }
     return index;
+}
+-(int) reduceHealth {
+    return --health;
+}
+-(void) showHealth {
+    CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage:@"yellowBaddie.png"];
+    [baddie setTexture: tex];
 }
 
 -(CGRect) getBoundingBox {

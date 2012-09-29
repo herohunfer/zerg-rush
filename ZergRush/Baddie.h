@@ -3,6 +3,8 @@
 
 @interface Baddie : CCNode {
     CCSprite *baddie;
+    int health;
+    
 }
 
 -(id) init:(int) xcoord:(int) ycoord;
@@ -13,5 +15,7 @@
 -(int) gety;
 -(CGPoint) getPosition;
 -(void) setPosition:(CGPoint) p;
+-(int) reduceHealth;
+-(void) showHealth;
 
 @end
