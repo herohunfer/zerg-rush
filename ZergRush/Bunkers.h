@@ -6,4 +6,6 @@
 }
 
 -(id) init;
+-(int) count;
+-(Bunker *) getBunker: (int) index;
 @end
