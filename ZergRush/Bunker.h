@@ -13,8 +13,11 @@
 }
 
 -(id) init:(int) xcoord:(int) ycoord;
+
 -(CGRect) getBoundingBox;
 
-
+-(int) getx;
+-(int) gety;
+-(CGPoint) getPosition;
 
 @end

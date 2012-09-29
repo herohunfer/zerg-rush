@@ -14,29 +14,29 @@
 -(id) findTarget: {
 
 }
+ */
 
--(Boolean) hasReachedTarget {
-    Bunker *target = this.target;
+-(boolean_t) hasReachedTarget: (Bunker*) target {
     CGPoint pos = [target position];
     
-    return  baddie.position.x >= pos.x &&
+    return  (baddie.position.x >= pos.x &&
             baddie.position.y >= pos.y &&
-            baddie.position.x <= pos.x + 10 &&
-            baddie.position.y <= pos.y + 10;
+            baddie.position.x <= (pos.x + 10) &&
+            baddie.position.y <= (pos.y + 10));
  
 }
-*/
+
 -(int) getNearestBunker: (Bunkers*) bunkers {
     double shortestDistance;
     int index;
     
     for (int i=0; i < [bunkers count]; i++) {
-        Bunker *bunker = [bunkers getBunker:i];
-        int bunkerX = [bunker position].x;
-        int bunkerY = [bunker position].y;
+        Bunker *cBunker = [bunkers getBunker:i];
+        int bunkerX = [cBunker getx];
+        int bunkerY = [cBunker gety];
     
-        int baddieX = [baddie position].x;
-        int baddieY = [baddie position].y;
+        int baddieX = baddie.position.x;
+        int baddieY = baddie.position.y;
         
         int dx = bunkerX - baddieX;
         int dy = bunkerY - baddieY;
@@ -52,6 +52,19 @@
 
 -(CGRect) getBoundingBox {
     return baddie.boundingBox;
+}
+
+-(int) getx {
+    return baddie.position.x;
+}
+-(int) gety {
+    return baddie.position.y;
+}
+-(CGPoint) getPosition {
+        return baddie.position;
+    }
+-(void) setPosition:(CGPoint) p {
+    baddie.position = p;
 }
 
 @end
