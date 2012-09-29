@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7924BB8C1616C838002D7ABF /* Baddie.m in Sources */ = {isa = PBXBuildFile; fileRef = 7924BB891616C838002D7ABF /* Baddie.m */; };
+		7924BB8D1616C838002D7ABF /* Bunker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7924BB8B1616C838002D7ABF /* Bunker.m */; };
 		7943CC2816166686002A723C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7943CC2716166686002A723C /* QuartzCore.framework */; };
 		7943CC2A16166686002A723C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7943CC2916166686002A723C /* OpenGLES.framework */; };
 		7943CC2C16166686002A723C /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7943CC2B16166686002A723C /* OpenAL.framework */; };
@@ -141,6 +143,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7924BB881616C838002D7ABF /* Baddie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baddie.h; sourceTree = "<group>"; };
+		7924BB891616C838002D7ABF /* Baddie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baddie.m; sourceTree = "<group>"; };
+		7924BB8A1616C838002D7ABF /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
+		7924BB8B1616C838002D7ABF /* Bunker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bunker.m; sourceTree = "<group>"; };
 		7943CC2316166686002A723C /* ZergRush.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZergRush.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7943CC2716166686002A723C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7943CC2916166686002A723C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -468,6 +474,10 @@
 		7943CC3916166686002A723C /* ZergRush */ = {
 			isa = PBXGroup;
 			children = (
+				7924BB881616C838002D7ABF /* Baddie.h */,
+				7924BB891616C838002D7ABF /* Baddie.m */,
+				7924BB8A1616C838002D7ABF /* Bunker.h */,
+				7924BB8B1616C838002D7ABF /* Bunker.m */,
 				7984EA4D1616AD8300A69113 /* Bunkers.h */,
 				7984EA4E1616AD8900A69113 /* Bunkers.m */,
 				7984EA4A1616A82100A69113 /* Baddies.h */,
@@ -1033,6 +1043,8 @@
 				7984EA41161690BC00A69113 /* ZergRushLayer.m in Sources */,
 				7984EA4C1616A82800A69113 /* Baddies.m in Sources */,
 				7984EA4F1616AD8900A69113 /* Bunkers.m in Sources */,
+				7924BB8C1616C838002D7ABF /* Baddie.m in Sources */,
+				7924BB8D1616C838002D7ABF /* Bunker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
