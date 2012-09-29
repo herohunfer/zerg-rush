@@ -24,6 +24,7 @@ Baddies *baddies;
 Boolean isEnd = false;
 int timeCount = -1;
 int base = 180;
+// Boolean flag; //not work well
 
 // ZergRushLayer implementation
 @implementation ZergRushLayer
@@ -82,7 +83,8 @@ int base = 180;
         //draw baddies (will need to change this to be more dynamic)
         baddies = [[Baddies alloc] init];
         
-        
+        //set flag
+        //flag = true;
         
         //[baddies addBaddie];
         [self addChild:baddies];
@@ -119,7 +121,7 @@ int base = 180;
             if ([baddie reduceHealth] <= 0)
                 [baddies removeBaddie:baddie];
             else [baddie showHealth];
-            break;
+            // break;
         }
     }
 }
@@ -150,123 +152,131 @@ int base = 180;
 }
 
 - (void) nextFrame:(ccTime)dt {
-    timeCount++;
-    if (timeCount % base == 0) {
-        [baddies addBaddie:((timeCount / base) % 6 / 3)]; // 3 per direction
-    }
-    if (timeCount % 600 == 0 && base > 30)
-        base-=30;
-    
-    // loop through all the baddies
-    if (!isEnd)
+    /*
+    if (flag)
     {
-    for (int i = 0; i < [baddies count]; i++) {
-        Baddie *currentBaddie = [baddies getBaddie:i];
-        //Bunker *nearestbunker = [bunkers getBunker:0];
-
-        int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
-        if (NearestBunkerIndex < 0)
-            isEnd = true;
-        else {
-            Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
-            
-            int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
-            int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
-            double angle = atan2(yDiff, xDiff);
-            
-            [currentBaddie setPosition :ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle))];
-            [baddies replace:i :currentBaddie];
-            if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
-                if ([nearestbunker reduceHealth] <= 0)
-                    [nearestbunker getBunker].visible = true;
+        flag = !(flag);   // 30 fraps per second
+     Does not work well. too slow.
+     */
+        timeCount++;
+        if (timeCount % base == 0) {
+            [baddies addBaddie:((timeCount / base) % 6 / 3)]; // 3 per direction
+        }
+        if (timeCount % 600 == 0 && base > 30)
+            base-=30;
+        
+        // loop through all the baddies
+        if (!isEnd)
+        {
+            for (int i = 0; i < [baddies count]; i++) {
+                Baddie *currentBaddie = [baddies getBaddie:i];
+                //Bunker *nearestbunker = [bunkers getBunker:0];
+                
+                int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
+                if (NearestBunkerIndex < 0)
+                    isEnd = true;
+                else {
+                    Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
+                    
+                    int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
+                    int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
+                    double angle = atan2(yDiff, xDiff);
+                    
+                    [currentBaddie setPosition
+                     :ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle))];
+                    [baddies replace:i :currentBaddie];
+                    if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
+                        if ([nearestbunker reduceHealth] <= 0)
+                            [nearestbunker getBunker].visible = true;
+                    }
+                }
             }
         }
-    }
-    }
-    
-    else
-    {
-        while ([baddies count] > 0) {
-            int i = [baddies count] -1;
-            [baddies removeBaddie:[baddies getBaddie:i]];
-        }
-        while ([baddies count] < 20) 
-            [baddies addBaddie];
         
-    for (int i = 0; i < [baddies count]; i++) {
-         Baddie *currentBaddie = [baddies getBaddie:i];
-    //all gone. game end. Empty the baddies.
-        if ((i / 10) == 1)
+        else
         {
-            [currentBaddie showHealth];
+            while ([baddies count] > 0) {
+                int i = [baddies count] -1;
+                [baddies removeBaddie:[baddies getBaddie:i]];
+            }
+            while ([baddies count] < 20)
+                [baddies addBaddie];
+            
+            for (int i = 0; i < [baddies count]; i++) {
+                Baddie *currentBaddie = [baddies getBaddie:i];
+                //all gone. game end. Empty the baddies.
+                if ((i / 10) == 1)
+                {
+                    [currentBaddie showHealth];
+                }
+                switch (i) {
+                    case 0:
+                        [currentBaddie setPosition :ccp(40, 210)];
+                        break;
+                    case 1:
+                        [currentBaddie setPosition :ccp(30, 240)];
+                        break;
+                    case 2:
+                        [currentBaddie setPosition :ccp(40, 270)];
+                        break;
+                    case 3:
+                        [currentBaddie setPosition :ccp(70, 300)];
+                        break;
+                    case 4:
+                        [currentBaddie setPosition :ccp(130, 300)];
+                        break;
+                    case 5:
+                        [currentBaddie setPosition :ccp(130, 210)];
+                        break;
+                    case 6:
+                        [currentBaddie setPosition :ccp(130, 240)];
+                        break;
+                    case 7:
+                        [currentBaddie setPosition :ccp(100, 240)];
+                        break;
+                    case 8:
+                        [currentBaddie setPosition :ccp(110, 180)];
+                        break;
+                    case 9:
+                        [currentBaddie setPosition :ccp(70, 180)];
+                        break;
+                    case 10:
+                        [currentBaddie setPosition :ccp(200, 210)];
+                        break;
+                    case 11:
+                        [currentBaddie setPosition :ccp(190, 240)];
+                        break;
+                    case 12:
+                        [currentBaddie setPosition :ccp(200, 270)];
+                        break;
+                    case 13:
+                        [currentBaddie setPosition :ccp(230, 300)];
+                        break;
+                    case 14:
+                        [currentBaddie setPosition :ccp(290, 300)];
+                        break;
+                    case 15:
+                        [currentBaddie setPosition :ccp(290, 210)];
+                        break;
+                    case 16:
+                        [currentBaddie setPosition :ccp(290, 240)];
+                        break;
+                    case 17:
+                        [currentBaddie setPosition :ccp(260, 240)];
+                        break;
+                    case 18:
+                        [currentBaddie setPosition :ccp(270, 180)];
+                        break;
+                    case 19:
+                        [currentBaddie setPosition :ccp(230, 180)];
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
         }
-        switch (i) {
-            case 0:
-                [currentBaddie setPosition :ccp(40, 210)];
-                break;
-            case 1:
-                [currentBaddie setPosition :ccp(30, 240)];
-                break;
-            case 2:
-                [currentBaddie setPosition :ccp(40, 270)];
-                break;
-            case 3:
-                [currentBaddie setPosition :ccp(70, 300)];
-                break;
-            case 4:
-                [currentBaddie setPosition :ccp(130, 300)];
-                break;
-            case 5:
-                [currentBaddie setPosition :ccp(130, 210)];
-                break;
-            case 6:
-                [currentBaddie setPosition :ccp(130, 240)];
-                break;
-            case 7:
-                [currentBaddie setPosition :ccp(100, 240)];
-                break;
-            case 8:
-                [currentBaddie setPosition :ccp(110, 180)];
-                break;
-            case 9:
-                [currentBaddie setPosition :ccp(70, 180)];
-                break;
-            case 10:
-                [currentBaddie setPosition :ccp(200, 210)];
-                break;
-            case 11:
-                [currentBaddie setPosition :ccp(190, 240)];
-                break;
-            case 12:
-                [currentBaddie setPosition :ccp(200, 270)];
-                break;
-            case 13:
-                [currentBaddie setPosition :ccp(230, 300)];
-                break;
-            case 14:
-                [currentBaddie setPosition :ccp(290, 300)];
-                break;
-            case 15:
-                [currentBaddie setPosition :ccp(290, 210)];
-                break;
-            case 16:
-                [currentBaddie setPosition :ccp(290, 240)];
-                break;
-            case 17:
-                [currentBaddie setPosition :ccp(260, 240)];
-                break;
-            case 18:
-                [currentBaddie setPosition :ccp(270, 180)];
-                break;
-            case 19:
-                [currentBaddie setPosition :ccp(230, 180)];
-                break;
-                
-            default:
-                break;
-        }
-    }
-    }
-     
+    // } //flag if close
+    // else flag = !flag;
 }
 @end
