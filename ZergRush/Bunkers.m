@@ -11,6 +11,7 @@
                 int objectWidthPosition = width + 40;
                 int objectHeightPosition = height + 48;
                 Bunker *bunker = [[Bunker alloc] init:objectWidthPosition:objectHeightPosition];
+                [bunker getBunker].visible = false;
                 
                 [self addChild:bunker];
                 

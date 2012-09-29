@@ -33,7 +33,7 @@
     
     for (int i=0; i < [bunkers count]; i++) {
         Bunker *cBunker = [bunkers getBunker:i];
-        if ([cBunker getBunker].visible)
+        if (![cBunker getBunker].visible)
             {
                 int bunkerX = [cBunker getx];
                 int bunkerY = [cBunker gety];

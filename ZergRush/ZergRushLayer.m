@@ -45,12 +45,36 @@ int base = 180;
 }
 
 // on "init" you need to initialize your instance
+/*
+-(void) onEnter
+{
+	[super onEnter];
+    
+    
+    
+}
+ */
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-  
+        CCSprite *background;
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        /*
+        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
+            background = [CCSprite spriteWithFile:@"photo.PNG"];
+            background.rotation = 90;
+        } else {
+         */
+            background = [CCSprite spriteWithFile:@"photo.PNG"];
+        // }
+        background.position = ccp(size.width/2, size.height/2);
+        
+        // add the label as a child to this Layer
+        [self addChild: background];
+        
+        
         //draw bunkers
         bunkers = [[Bunkers alloc] init];
         [self addChild:bunkers];
@@ -154,7 +178,7 @@ int base = 180;
             [baddies replace:i :currentBaddie];
             if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
                 if ([nearestbunker reduceHealth] <= 0)
-                    [nearestbunker getBunker].visible = false;
+                    [nearestbunker getBunker].visible = true;
             }
         }
     }

@@ -13,6 +13,8 @@
     if ((self = [super init])) {
         bunker = [CCSprite spriteWithFile: @"bunker.png"];
         [bunker setPosition:ccp(xcoord, ycoord)];
+        bunker.scaleX = 2.0;
+        bunker.scaleY = 2.0;
         [self addChild:bunker];
         health = 600; // 60 fps * 5 baddies * 2 seconds
     }
