@@ -58,7 +58,7 @@ Boolean isEnd = false;
         
         
         
-        [baddies addBaddie];
+        //[baddies addBaddie];
         [self addChild:baddies];
         
         // schedule a repeating callback on every frame
@@ -122,6 +122,10 @@ Boolean isEnd = false;
 }
 
 - (void) nextFrame:(ccTime)dt {
+    if ([baddies count] < 20) {
+    [baddies addBaddie];
+    }
+    
     // loop through all the baddies
     if (!isEnd)
     {
@@ -149,39 +153,72 @@ Boolean isEnd = false;
     
     else
     {
+        while ([baddies count] < 20) 
+            [baddies addBaddie];
+        
     for (int i = 0; i < [baddies count]; i++) {
          Baddie *currentBaddie = [baddies getBaddie:i];
     //all gone. game end. Empty the baddies.
         switch (i) {
             case 0:
-                [currentBaddie setPosition :ccp(130, 210)];
+                [currentBaddie setPosition :ccp(40, 210)];
                 break;
             case 1:
-                [currentBaddie setPosition :ccp(120, 240)];
+                [currentBaddie setPosition :ccp(30, 240)];
                 break;
             case 2:
-                [currentBaddie setPosition :ccp(130, 270)];
+                [currentBaddie setPosition :ccp(40, 270)];
                 break;
             case 3:
-                [currentBaddie setPosition :ccp(160, 300)];
+                [currentBaddie setPosition :ccp(70, 300)];
                 break;
             case 4:
-                [currentBaddie setPosition :ccp(220, 300)];
+                [currentBaddie setPosition :ccp(130, 300)];
                 break;
             case 5:
-                [currentBaddie setPosition :ccp(220, 210)];
+                [currentBaddie setPosition :ccp(130, 210)];
                 break;
             case 6:
-                [currentBaddie setPosition :ccp(220, 240)];
+                [currentBaddie setPosition :ccp(130, 240)];
                 break;
             case 7:
-                [currentBaddie setPosition :ccp(190, 240)];
+                [currentBaddie setPosition :ccp(100, 240)];
                 break;
             case 8:
-                [currentBaddie setPosition :ccp(200, 180)];
+                [currentBaddie setPosition :ccp(110, 180)];
                 break;
             case 9:
-                [currentBaddie setPosition :ccp(160, 180)];
+                [currentBaddie setPosition :ccp(70, 180)];
+                break;
+            case 10:
+                [currentBaddie setPosition :ccp(200, 210)];
+                break;
+            case 11:
+                [currentBaddie setPosition :ccp(190, 240)];
+                break;
+            case 12:
+                [currentBaddie setPosition :ccp(200, 270)];
+                break;
+            case 13:
+                [currentBaddie setPosition :ccp(230, 300)];
+                break;
+            case 14:
+                [currentBaddie setPosition :ccp(290, 300)];
+                break;
+            case 15:
+                [currentBaddie setPosition :ccp(290, 210)];
+                break;
+            case 16:
+                [currentBaddie setPosition :ccp(290, 240)];
+                break;
+            case 17:
+                [currentBaddie setPosition :ccp(260, 240)];
+                break;
+            case 18:
+                [currentBaddie setPosition :ccp(270, 180)];
+                break;
+            case 19:
+                [currentBaddie setPosition :ccp(230, 180)];
                 break;
                 
             default:
