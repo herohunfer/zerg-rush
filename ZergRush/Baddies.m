@@ -66,4 +66,11 @@
     [baddies replaceObjectAtIndex:i withObject:newbaddie];
 }
 
+-(void) setAllAttacking:(boolean_t) attacking {
+    for (int i=0; i < [baddies count]; i++ ) {
+        Baddie *baddie = [baddies objectAtIndex:i];
+        [baddie setAttacking:attacking];
+    }
+}
+
 @end

@@ -11,7 +11,7 @@
         else health = 2;
         strength = str;
         [self setStrength :str];
-        
+        isAttacking = NO;
     }
     return self;
 }
@@ -22,12 +22,13 @@
  */
 
 -(boolean_t) hasReachedTarget: (Bunker*) target {
-    CGPoint pos = [target getPosition];
+    return CGRectContainsPoint([target getBoundingBox], [baddie position]);
+   /* CGPoint pos = [target getPosition];
     
     return  (baddie.position.x >= pos.x &&
             baddie.position.y >= pos.y &&
             baddie.position.x <= (pos.x + 10) &&
-            baddie.position.y <= (pos.y + 10));
+            baddie.position.y <= (pos.y + 10));*/
  
 }
 
@@ -92,6 +93,14 @@
 }
 -(int) getStrength {
     return strength;
+}
+
+-(boolean_t) isAttacking {
+    return isAttacking;
+}
+
+-(void) setAttacking:(boolean_t) attacking {
+    isAttacking = attacking;
 }
 
 @end
