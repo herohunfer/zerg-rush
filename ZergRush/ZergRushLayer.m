@@ -67,7 +67,12 @@ int base = 180;
             background.rotation = 90;
         } else {
          */
+        if ([self hasRetinaDisplay]) {
             background = [CCSprite spriteWithFile:@"photo.PNG"];
+        }
+        else {
+            background = [CCSprite spriteWithFile:@"photo-lowres.png"];
+        }
         // }
         background.position = ccp(size.width/2, size.height/2);
         
@@ -147,6 +152,15 @@ int base = 180;
 {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
+}
+
+-(BOOL)hasRetinaDisplay
+{
+    // checks for iPhone 4. will return a false positive on iPads, so use the above function in conjunction with this to determine if it's a 3GS or below, or an iPhone 4.
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2)
+        return YES;
+    else
+        return NO;
 }
 
 - (void) nextFrame:(ccTime)dt {

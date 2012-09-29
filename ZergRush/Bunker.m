@@ -11,10 +11,17 @@
 @implementation Bunker
 -(id) init:(int) xcoord: (int) ycoord {
     if ((self = [super init])) {
-        bunker = [CCSprite spriteWithFile: @"bunker.png"];
+        bunker = [CCSprite spriteWithFile: @"BlackIcon@2x.png"];
         [bunker setPosition:ccp(xcoord, ycoord)];
-        bunker.scaleX = 0.7;
-        bunker.scaleY = 0.7;
+        
+        if ([self hasRetinaDisplay]) {
+            bunker.scaleX = 1.1;
+            bunker.scaleY = 1.1;
+        }
+        else {
+            bunker.scaleX = 0.55;
+            bunker.scaleY = 0.55;
+        }
         [self addChild:bunker];
         health = 60; // 60 fps * 5 baddies * 2 seconds for debug using 60, otherwise 600
     }
@@ -43,6 +50,15 @@
 }
 -(int) reduceHealth {
     return --health;
+}
+
+-(BOOL)hasRetinaDisplay
+{
+    // checks for iPhone 4. will return a false positive on iPads, so use the above function in conjunction with this to determine if it's a 3GS or below, or an iPhone 4.
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2)
+        return YES;
+    else
+        return NO;
 }
 
 //returns 1 for north, 2 for east, 3 for south, 4 for west
