@@ -19,5 +19,5 @@
 -(int) getx;
 -(int) gety;
 -(CGPoint) getPosition;
-
+-(int) getWhichSideOfBunker:(CGPoint) p;
 @end

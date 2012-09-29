@@ -9,6 +9,9 @@
 }
 
 -(void) addBaddie {
+ //   Baddie *baddie = [[Baddie alloc] init:50:480];
+ //   [self addChild:baddie];
+ //   [baddies addObject:baddie];
     for (int i = 0; i < 10; i++) {
         Baddie *baddie = [[Baddie alloc] init:(random() % 320) : 480];
         [self addChild:baddie];
@@ -34,7 +37,7 @@
 -(void) removeBaddie:(id)baddie {
     [baddies removeObject:baddie];
     [self removeChild:baddie cleanup:YES];
-    [baddie release];
+   // [baddie release];
 }
 
 -(Baddie *) getBaddie:(int)index {

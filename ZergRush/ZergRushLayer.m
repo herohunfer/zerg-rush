@@ -122,7 +122,7 @@ Baddies *baddies;
 
 - (void) nextFrame:(ccTime)dt {
     // loop through all the baddies
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < [baddies count]; i++) {
         Baddie *currentBaddie = [baddies getBaddie:i];
         Bunker *nearestbunker = [bunkers getBunker:0];
         
@@ -133,7 +133,32 @@ Baddies *baddies;
         int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
         double angle = atan2(yDiff, xDiff);
         
-        [currentBaddie setPosition :ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle))];
+        CGPoint newPosition = ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle));
+        //check if newPosition is inside a bunker
+        for (int j=0; j < [bunkers count]; j++) {
+            Bunker *bunker = [bunkers getBunker:j];
+            CGRect bbox = [bunker getBoundingBox];
+            bbox.origin.x -= 7.5;
+            bbox.origin.y -= 7.5;
+            bbox.size.width += 15;
+            bbox.size.height += 15;
+
+            if (CGRectContainsPoint(bbox, newPosition)) {
+                int direction = [bunker getWhichSideOfBunker:newPosition];
+                if (direction == 1 || direction == 3) {
+                    newPosition = ccp([currentBaddie getx]+1, [currentBaddie gety]);
+                }
+                else if (direction == 2 || direction == 4) {
+                    newPosition = ccp([currentBaddie getx], [currentBaddie gety]-1);
+                }
+                else {
+                    newPosition = ccp(0, 0);
+                }
+                break;
+            }
+        }
+        
+        [currentBaddie setPosition :newPosition];
         [baddies replace:i :currentBaddie];
         if ([currentBaddie hasReachedTarget:nearestbunker] == true)
             nearestbunker.visible = false;
