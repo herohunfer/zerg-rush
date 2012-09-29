@@ -79,11 +79,21 @@ Boolean isEnd = false;
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-	CGPoint location = [self convertTouchToNodeSpace: touch];
-   /*
-	[cocosGuy stopAllActions];
-	[cocosGuy runAction: [CCMoveTo actionWithDuration:1 position:location]];
-    */
+    NSSet *allTouches = [event allTouches]; //Get all the current touches in the event
+    UITouch *aTouch = [allTouches anyObject]; //Get one of the touches, multitouch is disabled, so there is only always going to be one.
+    CGPoint pos = [aTouch locationInView:touch.view]; //Get the location of the touch
+    CGPoint ccPos = [[CCDirector sharedDirector] convertToGL:pos]; //Convert that location to something cocos2d can use
+    
+    //check all baddies
+    for (int i=0; i < [baddies count]; i++) {
+        Baddie* baddie = [baddies getBaddie:i];
+        if (CGRectContainsPoint([baddie getBoundingBox], ccPos)) //Method to check if a rectangle contains a point
+        {
+            //bunker.visible = NO; //Make your sprite invisible
+            [baddies removeBaddie:baddie];
+            break;
+        }
+    }
 }
 
 // on "dealloc" you need to release all your retained objects

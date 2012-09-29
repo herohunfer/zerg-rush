@@ -27,16 +27,22 @@
     }
 }
 
+-(int) count {
+    return [baddies count];
+}
+
+-(void) removeBaddie:(id)baddie {
+    [baddies removeObject:baddie];
+    [self removeChild:baddie cleanup:YES];
+    [baddie release];
+}
+
 -(Baddie *) getBaddie:(int)index {
     return [baddies objectAtIndex:index];
 }
 
 -(void) replace:(int) i: (Baddie*) newbaddie{
     [baddies replaceObjectAtIndex:i withObject:newbaddie];
-}
-
--(int) count {
-    return [baddies count];
 }
 
 @end

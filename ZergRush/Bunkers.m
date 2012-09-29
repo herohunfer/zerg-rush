@@ -31,4 +31,10 @@
     return [bunkers objectAtIndex:index];
 }
 
+-(void) removeBunker:(id)bunker {
+    [bunkers removeObject:bunker];
+    [self removeChild:bunker cleanup:YES];
+    [bunker release];
+}
+
 @end

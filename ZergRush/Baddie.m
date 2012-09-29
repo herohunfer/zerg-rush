@@ -52,6 +52,11 @@
     }
     return index;
 }
+
+-(CGRect) getBoundingBox {
+    return baddie.boundingBox;
+}
+
 -(int) getx {
     return baddie.position.x;
 }
@@ -64,4 +69,5 @@
 -(void) setPosition:(CGPoint) p {
     baddie.position = p;
 }
+
 @end

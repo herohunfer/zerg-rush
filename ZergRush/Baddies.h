@@ -7,8 +7,9 @@
 
 -(id) init;
 -(void) addBaddie;
+-(int) count;
+-(void) removeBaddie: (id) baddie;
 -(Baddie *) getBaddie: (int) index;
 -(void) replace:(int) i: (Baddie*) newbaddie;
--(int) count;
 
 @end

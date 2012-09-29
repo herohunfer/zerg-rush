@@ -12,14 +12,22 @@
 -(id) init:(int) xcoord: (int) ycoord {
     if ((self = [super init])) {
         bunker = [CCSprite spriteWithFile: @"bunker.png"];
-        bunker.position = ccp(xcoord, ycoord);
+        [bunker setPosition:ccp(xcoord, ycoord)];
         [self addChild:bunker];
     }
     return self;
 }
+
 -(CCSprite*) getBunker {
     return bunker;
 }
+
+
+-(CGRect) getBoundingBox {
+    return bunker.boundingBox;
+}
+
+
 -(int) getx {
     return bunker.position.x;
 }

@@ -8,4 +8,5 @@
 -(id) init;
 -(int) count;
 -(Bunker *) getBunker: (int) index;
+-(void) removeBunker: (id) bunker;
 @end
