@@ -9,10 +9,13 @@
 }
 
 -(void) addBaddie {
-    CCSprite *baddie = [CCSprite spriteWithFile: @"baddie.png"];
-    baddie.position = ccp(100, 100);
+    Baddie *baddie = [[Baddie alloc] init:100:100];
     [self addChild:baddie];
     [baddies addObject:baddie];
+    /*CCSprite *baddie = [CCSprite spriteWithFile: @"baddie.png"];
+    baddie.position = ccp(100, 100);
+    [self addChild:baddie];
+    [baddies addObject:baddie];*/
     
 }
 

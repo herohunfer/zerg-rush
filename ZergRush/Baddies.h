@@ -1,4 +1,5 @@
 #import "cocos2d.h"
+#import "Baddie.h"
 
 @interface Baddies : CCNode {
     NSMutableArray *baddies;
