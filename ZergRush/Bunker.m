@@ -14,6 +14,7 @@
         bunker = [CCSprite spriteWithFile: @"bunker.png"];
         [bunker setPosition:ccp(xcoord, ycoord)];
         [self addChild:bunker];
+        health = 600; // 60 fps * 5 baddies * 2 seconds
     }
     return self;
 }
@@ -37,6 +38,9 @@
 
 -(CGPoint) getPosition {
     return bunker.position;
+}
+-(int) reduceHealth {
+    return --health;
 }
 
 //returns 1 for north, 2 for east, 3 for south, 4 for west

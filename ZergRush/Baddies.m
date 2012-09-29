@@ -8,12 +8,15 @@
     return self;
 }
 
--(void) addBaddie {
+-(void) addBaddie:(int)i {
  //   Baddie *baddie = [[Baddie alloc] init:50:480];
  //   [self addChild:baddie];
  //   [baddies addObject:baddie];
  //   for (int i = 0; i < 10; i++) {
-        Baddie *baddie = [[Baddie alloc] init:(random() % 320) : 480];
+        Baddie *baddie;
+        if (i == 0)
+            baddie = [[Baddie alloc] init:(random() % 320) : 480];
+        else baddie = [[Baddie alloc] init:0 : (random() % 480)];
         [self addChild:baddie];
         [baddies addObject:baddie];
         /*CCSprite *baddie = [CCSprite spriteWithFile: @"baddie.png"];
@@ -22,6 +25,11 @@
          [baddies addObject:baddie];*/
    // }
     
+}
+-(void) addBaddie {
+    Baddie *baddie = [[Baddie alloc] init:(random() % 320) : 480];
+    [self addChild:baddie];
+    [baddies addObject:baddie];
 }
 
 -(void) draw {

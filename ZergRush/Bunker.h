@@ -10,6 +10,7 @@
 
 @interface Bunker : CCNode {
     CCSprite *bunker;
+    int health;
 }
 
 -(id) init:(int) xcoord:(int) ycoord;
@@ -21,5 +22,6 @@
 -(CGPoint) getPosition;
 -(int) getWhichSideOfBunker:(CGPoint) p;
 -(CCSprite*) getBunker;
+-(int) reduceHealth;
 
 @end

@@ -22,6 +22,8 @@
 Bunkers *bunkers;
 Baddies *baddies;
 Boolean isEnd = false;
+int timeCount = -1;
+int base = 180;
 
 // ZergRushLayer implementation
 @implementation ZergRushLayer
@@ -124,9 +126,12 @@ Boolean isEnd = false;
 }
 
 - (void) nextFrame:(ccTime)dt {
-    if ([baddies count] < 5) {
-    [baddies addBaddie];
+    timeCount++;
+    if (timeCount % base == 0) {
+        [baddies addBaddie:((timeCount / base) % 6 / 3)]; // 3 per direction
     }
+    if (timeCount % 600 == 0 && base > 30)
+        base-=30;
     
     // loop through all the baddies
     if (!isEnd)
@@ -147,8 +152,10 @@ Boolean isEnd = false;
             
             [currentBaddie setPosition :ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle))];
             [baddies replace:i :currentBaddie];
-            if ([currentBaddie hasReachedTarget:nearestbunker] == true)
-                [nearestbunker getBunker].visible = false;
+            if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
+                if ([nearestbunker reduceHealth] <= 0)
+                    [nearestbunker getBunker].visible = false;
+            }
         }
     }
     }
