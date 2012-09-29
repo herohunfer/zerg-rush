@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.h
+//  BunkerLayer.h
 //  ZergRush
 //
 //  Created by Kaisen Chen on 9/28/12.
@@ -13,11 +13,11 @@
 #import "cocos2d.h"
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+@interface ZergRushLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// returns a CCScene that contains the ZergRushLayer as the only child
 +(CCScene *) scene;
 
 @end

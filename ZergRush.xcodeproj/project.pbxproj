@@ -131,8 +131,13 @@
 		7943CDAB16166689002A723C /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 7943CDAA16166689002A723C /* vec4.c */; };
 		7943CDB016166689002A723C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943CDAF16166689002A723C /* main.m */; };
 		7943CDB316166689002A723C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943CDB216166689002A723C /* AppDelegate.m */; };
-		7943CDB616166689002A723C /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943CDB516166689002A723C /* HelloWorldLayer.m */; };
 		7943CDB916166689002A723C /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943CDB816166689002A723C /* IntroLayer.m */; };
+		7984EA311616867000A69113 /* bunker.png in Resources */ = {isa = PBXBuildFile; fileRef = 7984EA301616867000A69113 /* bunker.png */; };
+		7984EA41161690BC00A69113 /* ZergRushLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7984EA40161690BC00A69113 /* ZergRushLayer.m */; };
+		7984EA441616985D00A69113 /* baddie.png in Resources */ = {isa = PBXBuildFile; fileRef = 7984EA431616985D00A69113 /* baddie.png */; };
+		7984EA4C1616A82800A69113 /* Baddies.m in Sources */ = {isa = PBXBuildFile; fileRef = 7984EA4B1616A82800A69113 /* Baddies.m */; };
+		7984EA4F1616AD8900A69113 /* Bunkers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7984EA4E1616AD8900A69113 /* Bunkers.m */; };
+		79C8228B161673BD00C3FF31 /* seeker.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C8228A161673BD00C3FF31 /* seeker.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -394,10 +399,17 @@
 		7943CDAF16166689002A723C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7943CDB116166689002A723C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7943CDB216166689002A723C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7943CDB416166689002A723C /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		7943CDB516166689002A723C /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		7943CDB716166689002A723C /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		7943CDB816166689002A723C /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		7984EA301616867000A69113 /* bunker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bunker.png; path = Resources/bunker.png; sourceTree = "<group>"; };
+		7984EA40161690BC00A69113 /* ZergRushLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZergRushLayer.m; sourceTree = "<group>"; };
+		7984EA42161690C400A69113 /* ZergRushLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZergRushLayer.h; sourceTree = "<group>"; };
+		7984EA431616985D00A69113 /* baddie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = baddie.png; path = Resources/baddie.png; sourceTree = "<group>"; };
+		7984EA4A1616A82100A69113 /* Baddies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baddies.h; sourceTree = "<group>"; };
+		7984EA4B1616A82800A69113 /* Baddies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baddies.m; sourceTree = "<group>"; };
+		7984EA4D1616AD8300A69113 /* Bunkers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunkers.h; sourceTree = "<group>"; };
+		7984EA4E1616AD8900A69113 /* Bunkers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bunkers.m; sourceTree = "<group>"; };
+		79C8228A161673BD00C3FF31 /* seeker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seeker.png; path = Resources/seeker.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,10 +468,14 @@
 		7943CC3916166686002A723C /* ZergRush */ = {
 			isa = PBXGroup;
 			children = (
+				7984EA4D1616AD8300A69113 /* Bunkers.h */,
+				7984EA4E1616AD8900A69113 /* Bunkers.m */,
+				7984EA4A1616A82100A69113 /* Baddies.h */,
+				7984EA4B1616A82800A69113 /* Baddies.m */,
+				7984EA42161690C400A69113 /* ZergRushLayer.h */,
+				7984EA40161690BC00A69113 /* ZergRushLayer.m */,
 				7943CDB116166689002A723C /* AppDelegate.h */,
 				7943CDB216166689002A723C /* AppDelegate.m */,
-				7943CDB416166689002A723C /* HelloWorldLayer.h */,
-				7943CDB516166689002A723C /* HelloWorldLayer.m */,
 				7943CDB716166689002A723C /* IntroLayer.h */,
 				7943CDB816166689002A723C /* IntroLayer.m */,
 				7943CC3A16166686002A723C /* Resources */,
@@ -472,10 +488,13 @@
 		7943CC3A16166686002A723C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				79C8228A161673BD00C3FF31 /* seeker.png */,
 				7943CC3B16166686002A723C /* Default.png */,
 				7943CC3D16166686002A723C /* Default-Landscape~ipad.png */,
 				7943CC3F16166686002A723C /* fps_images.png */,
+				7984EA431616985D00A69113 /* baddie.png */,
 				7943CC4116166686002A723C /* fps_images-hd.png */,
+				7984EA301616867000A69113 /* bunker.png */,
 				7943CC4316166686002A723C /* fps_images-ipadhd.png */,
 				7943CC4516166686002A723C /* Icon-72.png */,
 				7943CC4716166686002A723C /* Icon-Small-50.png */,
@@ -895,6 +914,9 @@
 				7943CC5016166686002A723C /* Icon@2x.png in Resources */,
 				7943CC5316166686002A723C /* iTunesArtwork in Resources */,
 				7943CD9116166689002A723C /* ChangeLog in Resources */,
+				79C8228B161673BD00C3FF31 /* seeker.png in Resources */,
+				7984EA311616867000A69113 /* bunker.png in Resources */,
+				7984EA441616985D00A69113 /* baddie.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,8 +1029,10 @@
 				7943CDAB16166689002A723C /* vec4.c in Sources */,
 				7943CDB016166689002A723C /* main.m in Sources */,
 				7943CDB316166689002A723C /* AppDelegate.m in Sources */,
-				7943CDB616166689002A723C /* HelloWorldLayer.m in Sources */,
 				7943CDB916166689002A723C /* IntroLayer.m in Sources */,
+				7984EA41161690BC00A69113 /* ZergRushLayer.m in Sources */,
+				7984EA4C1616A82800A69113 /* Baddies.m in Sources */,
+				7984EA4F1616AD8900A69113 /* Bunkers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,11 +1089,13 @@
 				GCC_PREFIX_HEADER = ZergRush/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"ZergRush/libs/kazmath/include\"";
 				INFOPLIST_FILE = ZergRush/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1083,11 +1109,13 @@
 				GCC_PREFIX_HEADER = ZergRush/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"ZergRush/libs/kazmath/include\"";
 				INFOPLIST_FILE = ZergRush/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1112,6 +1140,7 @@
 				7943CDBE16166689002A723C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
