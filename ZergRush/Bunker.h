@@ -13,9 +13,8 @@
 }
 
 -(id) init:(int) xcoord:(int) ycoord;
-
-
-
-
+-(int) getx;
+-(int) gety;
+-(CGPoint) getPosition;
 
 @end

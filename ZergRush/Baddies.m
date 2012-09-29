@@ -27,4 +27,11 @@
     }
 }
 
+-(Baddie *) getBaddie:(int)index {
+    return [baddies objectAtIndex:index];
+}
+
+-(void) replace:(int) i: (Baddie*) newbaddie{
+    [baddies replaceObjectAtIndex:i withObject:newbaddie];
+}
 @end

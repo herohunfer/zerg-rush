@@ -111,18 +111,22 @@ Baddies *baddies;
 }
 
 - (void) nextFrame:(ccTime)dt {
-   /* for (int i = 0; i < counter; i++) {
-        CCSprite *currentSeek = (CCSprite *)([seek objectAtIndex:i]);
-        int xDiff1 = (cocosGuy.position.x) - currentSeek.position.x;
-        int yDiff1 = (cocosGuy.position.y) - currentSeek.position.y;
-        double angle1 = atan2(yDiff1, xDiff1);
+    // loop through all the baddies
+    for (int i = 0; i < 10; i++) {
+        Baddie *currentBaddie = [baddies getBaddie:i];
+        Bunker *nearestbunker = [bunkers getBunker:0];
         
-        currentSeek.position =
-        ccp(currentSeek.position.x+1*cos(angle1),currentSeek.position.y+1*sin(angle1));
+        //int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
+        //Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
         
-        if ((fabs(cocosGuy.position.x - currentSeek.position.x) < 5)
-            && (fabs(cocosGuy.position.y - currentSeek.position.y) < 5))
-            cocosGuy.visible = false;
-    }*/
+        int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
+        int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
+        double angle = atan2(yDiff, xDiff);
+        
+        [currentBaddie setPosition :ccp([currentBaddie getx]+1*cos(angle),[currentBaddie gety]+1*sin(angle))];
+        [baddies replace:i :currentBaddie];
+        if ([currentBaddie hasReachedTarget:nearestbunker] == true)
+            nearestbunker.visible = false;
+    }
 }
 @end

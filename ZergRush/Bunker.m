@@ -17,4 +17,15 @@
     }
     return self;
 }
+-(int) getx {
+    return bunker.position.x;
+}
+-(int) gety {
+    return bunker.position.y;
+}
+
+-(CGPoint) getPosition {
+    return bunker.position;
+}
+
 @end
