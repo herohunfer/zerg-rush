@@ -17,6 +17,9 @@
     }
     return self;
 }
+-(CCSprite*) getBunker {
+    return bunker;
+}
 -(int) getx {
     return bunker.position.x;
 }

@@ -9,5 +9,6 @@
 -(void) addBaddie;
 -(Baddie *) getBaddie: (int) index;
 -(void) replace:(int) i: (Baddie*) newbaddie;
+-(int) count;
 
 @end

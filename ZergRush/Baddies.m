@@ -34,4 +34,9 @@
 -(void) replace:(int) i: (Baddie*) newbaddie{
     [baddies replaceObjectAtIndex:i withObject:newbaddie];
 }
+
+-(int) count {
+    return [baddies count];
+}
+
 @end

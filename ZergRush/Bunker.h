@@ -16,5 +16,6 @@
 -(int) getx;
 -(int) gety;
 -(CGPoint) getPosition;
+-(CCSprite*) getBunker;
 
 @end
