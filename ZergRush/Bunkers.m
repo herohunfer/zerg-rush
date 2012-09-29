@@ -23,4 +23,12 @@
     return self;
 }
 
+-(int) count {
+    return [bunkers count];
+}
+
+-(Bunker *) getBunker:(int)index {
+    return [bunkers objectAtIndex:index];
+}
+
 @end
