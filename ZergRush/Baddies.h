@@ -12,5 +12,5 @@
 -(void) removeBaddie: (id) baddie;
 -(Baddie *) getBaddie: (int) index;
 -(void) replace:(int) i: (Baddie*) newbaddie;
-
+-(void) setAllAttacking:(boolean_t) attacking;
 @end

@@ -202,11 +202,26 @@ int bossBase = 300;
                         int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
                         double angle = atan2(yDiff, xDiff);
                         
-                        [currentBaddie setPosition
-                         :ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle))];
+                        CGPoint newPosition = ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle));
+                        if (!CGRectContainsPoint([nearestbunker getBoundingBox], newPosition)) {
+                            [currentBaddie setPosition:newPosition];
+                        }
+                        else {
+                            if ([currentBaddie isAttacking]) {
+                                //don't move
+                            }
+                            else {
+                                //move anyway and set attacking
+                                [currentBaddie setPosition:newPosition];
+                                [currentBaddie setAttacking:YES];
+                            }
+                        }
+                        
                         if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
-                            if ([nearestbunker reduceHealth:str] <= 0)
+                            if ([nearestbunker reduceHealth:str] <= 0) {
                                 [nearestbunker getBunker].visible = true;
+                                [baddies setAllAttacking:NO];
+                            }
                         }
                     }
                 }
