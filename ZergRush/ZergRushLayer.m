@@ -24,6 +24,7 @@ Baddies *baddies;
 Boolean isEnd = false;
 int timeCount = -1;
 int base = 180;
+int bossBase = 300;
 // Boolean flag; //not work well
 
 // ZergRushLayer implementation
@@ -160,8 +161,12 @@ int base = 180;
      */
         timeCount++;
         if (timeCount % base == 0) {
-            [baddies addBaddie:((timeCount / base) % 6 / 3)]; // 3 per direction
+            [baddies addBaddie:((timeCount / base) % 6 / 3) :0]; // 3 per direction
         }
+        if (timeCount % bossBase == 0) {
+            [baddies addBaddie:((timeCount / bossBase) % 2) :1]; // 3 per direction
+        }
+        
         if (timeCount % 600 == 0 && base > 30)
             base-=30;
         
@@ -170,24 +175,25 @@ int base = 180;
         {
             for (int i = 0; i < [baddies count]; i++) {
                 Baddie *currentBaddie = [baddies getBaddie:i];
+                int str = [currentBaddie getStrength];
                 //Bunker *nearestbunker = [bunkers getBunker:0];
-                
-                int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
-                if (NearestBunkerIndex < 0)
-                    isEnd = true;
-                else {
-                    Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
-                    
-                    int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
-                    int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
-                    double angle = atan2(yDiff, xDiff);
-                    
-                    [currentBaddie setPosition
-                     :ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle))];
-                    [baddies replace:i :currentBaddie];
-                    if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
-                        if ([nearestbunker reduceHealth] <= 0)
-                            [nearestbunker getBunker].visible = true;
+                if ([currentBaddie getStrength] ==0 || timeCount % 2 == 0) {
+                    int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
+                    if (NearestBunkerIndex < 0)
+                        isEnd = true;
+                    else {
+                        Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
+                        
+                        int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
+                        int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
+                        double angle = atan2(yDiff, xDiff);
+                        
+                        [currentBaddie setPosition
+                         :ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle))];
+                        if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
+                            if ([nearestbunker reduceHealth:str] <= 0)
+                                [nearestbunker getBunker].visible = true;
+                        }
                     }
                 }
             }
@@ -200,13 +206,14 @@ int base = 180;
                 [baddies removeBaddie:[baddies getBaddie:i]];
             }
             while ([baddies count] < 20)
-                [baddies addBaddie];
+                [baddies addBaddie :0:0];
             
             for (int i = 0; i < [baddies count]; i++) {
                 Baddie *currentBaddie = [baddies getBaddie:i];
                 //all gone. game end. Empty the baddies.
                 if ((i / 10) == 1)
                 {
+                    [currentBaddie reduceHealth];
                     [currentBaddie showHealth];
                 }
                 switch (i) {

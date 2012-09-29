@@ -6,8 +6,8 @@
 }
 
 -(id) init;
--(void) addBaddie;
--(void) addBaddie:(int)i;
+-(void) addBaddie:(int)str;
+-(void) addBaddie:(int)i :(int)str;
 -(int) count;
 -(void) removeBaddie: (id) baddie;
 -(Baddie *) getBaddie: (int) index;

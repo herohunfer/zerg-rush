@@ -22,6 +22,6 @@
 -(CGPoint) getPosition;
 -(int) getWhichSideOfBunker:(CGPoint) p;
 -(CCSprite*) getBunker;
--(int) reduceHealth;
+-(int) reduceHealth:(int) str;
 
 @end

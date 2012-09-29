@@ -2,12 +2,16 @@
 #import "Bunker.h"
 
 @implementation Baddie
--(id) init: (int) xcoord: (int) ycoord {
+-(id) init: (int) xcoord: (int) ycoord :(int) str{
     if ((self = [super init])) {
         baddie = [CCSprite spriteWithFile: @"baddie.png"];
         baddie.position = ccp(xcoord, ycoord);
         [self addChild:baddie];
-        health = 2;
+        if (str == 1) health = 4;
+        else health = 2;
+        strength = str;
+        [self setStrength :str];
+        
     }
     return self;
 }
@@ -57,8 +61,11 @@
     return --health;
 }
 -(void) showHealth {
-    CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage:@"yellowBaddie.png"];
-    [baddie setTexture: tex];
+    if (health < 2)
+    {
+        CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage:@"yellowBaddie.png"];
+        [baddie setTexture: tex];
+    }
 }
 
 -(CGRect) getBoundingBox {
@@ -76,6 +83,15 @@
     }
 -(void) setPosition:(CGPoint) p {
     baddie.position = p;
+}
+-(void) setStrength:(int) str {
+    if (str == 1) {
+        baddie.scaleX = 3;
+        baddie.scaleY = 3;
+    }
+}
+-(int) getStrength {
+    return strength;
 }
 
 @end

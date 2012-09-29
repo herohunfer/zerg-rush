@@ -41,8 +41,11 @@
 -(CGPoint) getPosition {
     return bunker.position;
 }
--(int) reduceHealth {
-    return --health;
+-(int) reduceHealth:(int) str{
+    if (str ==0) {
+        return --health;
+    }
+    return (health-=2);
 }
 
 //returns 1 for north, 2 for east, 3 for south, 4 for west
