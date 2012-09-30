@@ -29,8 +29,14 @@
         
         //health bar
         healthBarBorder = [CCSprite spriteWithFile:@"progressbarborder.png"];
-        healthBarBorder.scaleX = 0.45;
-        healthBarBorder.scaleY = 0.45;
+        if ([self hasRetinaDisplay]) {
+            healthBarBorder.scaleX = 0.8;
+            healthBarBorder.scaleY = 0.8;
+        }
+        else {
+            healthBarBorder.scaleX = 0.45;
+            healthBarBorder.scaleY = 0.45;
+        }
         [healthBarBorder setPosition:ccp(xcoord, ycoord-18)];
         [self addChild: healthBarBorder z:2];
         
