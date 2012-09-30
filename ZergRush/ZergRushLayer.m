@@ -54,7 +54,7 @@ CCSprite *apple;
 
 -(void) onPower {
     NSLog(@"on power");
-    if (power > 0) {
+    if (power > 0 && !activePower) {
         power -= 25;
         [powerLabel setString:[NSString stringWithFormat:@"%i", power]];
         
@@ -246,10 +246,14 @@ CCSprite *apple;
         
         if (timeCount % 600 == 0 && base > 30)
             base-=30;
-        
+    // add apple power every 30 secs
+    if (timeCount % 600 == 0 && power < 100) {
+        power+=25;
+        [powerLabel setString:[NSString stringWithFormat:@"%i", power]];
+    }
         // POWER STAGE
     if (activePower) {
-        apple.position = ccp( apple.position.x, apple.position.y - 5);
+        apple.position = ccp( apple.position.x, apple.position.y - 10);
         if (apple.position.y < -32) {
             while ([baddies count] > 0) {
                 int i = [baddies count] -1;
