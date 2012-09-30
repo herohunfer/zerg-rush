@@ -56,7 +56,7 @@ CCSprite *apple;
     NSLog(@"on power");
     if (power > 0 && !activePower) {
         power -= 25;
-        [powerLabel setString:[NSString stringWithFormat:@"%i", power]];
+        [powerLabel setString:[NSString stringWithFormat:@"%i%%", power]];
         
         apple = [CCSprite spriteWithFile: @"apple.png"];
         apple.position = ccp( 160, 480 );
@@ -95,9 +95,17 @@ CCSprite *apple;
         activePower = false;
         
         // power menu
-        CCMenuItemFont  *item1 =
-        [CCMenuItemFont itemFromString:@"xxx" target:self selector:@selector(onPower)];
-        item1.position = ccp(310-160, 470-240);
+        CCMenuItemImage  *item1 =
+        [CCMenuItemImage itemWithNormalImage:@"apple.png" selectedImage:@"apple.png" target:self selector:@selector(onPower)];
+        if ([self hasRetinaDisplay]) {
+            item1.scaleX = 0.8;
+            item1.scaleY = 0.8;
+        }
+        else {
+            item1.scaleX = 0.4;
+            item1.scaleY = 0.4;
+        }
+        item1.position = ccp(300-160, 470-240);
         // item1.opacity = 100;
         CCMenu *myMenu = [CCMenu menuWithItems: item1, nil];
         [self addChild: myMenu];
@@ -127,9 +135,9 @@ CCSprite *apple;
         [self addChild:scoreLabel z:1];
         
         //power label
-        power = 75;
-        powerLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", power] fontName:@"Helvetica Neue" fontSize:13];
-        powerLabel.position = ccp(265, 470);
+        power = 100;
+        powerLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i %%", power] fontName:@"Helvetica Neue" fontSize:13];
+        powerLabel.position = ccp(240, 470);
         [self addChild:powerLabel z:1];
         
         
@@ -230,28 +238,8 @@ CCSprite *apple;
  */
 
 - (void) nextFrame:(ccTime)dt {
-    /*
-    if (flag)
-    {
-        flag = !(flag);   // 30 fraps per second
-     Does not work well. too slow.
-     */
-        timeCount++;
-        if (timeCount % base == 0) {
-            [baddies addBaddie:((timeCount / base) % 6 / 3) :0]; // 3 per direction
-        }
-        if (timeCount % bossBase == 0) {
-            [baddies addBaddie:((timeCount / bossBase) % 2) :1]; // 3 per direction
-        }
-        
-        if (timeCount % 600 == 0 && base > 30)
-            base-=30;
-    // add apple power every 30 secs
-    if (timeCount % 600 == 0 && power < 100) {
-        power+=25;
-        [powerLabel setString:[NSString stringWithFormat:@"%i", power]];
-    }
-        // POWER STAGE
+    
+    // POWER STAGE
     if (activePower) {
         apple.position = ccp( apple.position.x, apple.position.y - 10);
         if (apple.position.y < -32) {
@@ -263,145 +251,161 @@ CCSprite *apple;
             activePower = false;
         }
     }
-        // loop through all the baddies
-        if (!isEnd)
-        {
-            for (int i = 0; i < [baddies count]; i++) {
-                Baddie *currentBaddie = [baddies getBaddie:i];
-                int str = [currentBaddie getStrength];
-                //Bunker *nearestbunker = [bunkers getBunker:0];
-                if ([currentBaddie getStrength] ==0 || timeCount % 2 == 0) {
-                    int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
-                    if (NearestBunkerIndex < 0) {
-                        isEnd = true;
-                        flag = true;
+    // loop through all the baddies
+    if (!isEnd)
+    {
+        timeCount++;
+        if (timeCount % base == 0) {
+            [baddies addBaddie:((timeCount / base) % 6 / 3) :0]; // 3 per direction
+        }
+        if (timeCount % bossBase == 0) {
+            [baddies addBaddie:((timeCount / bossBase) % 2) :1]; // 3 per direction
+        }
+        
+        if (timeCount % 600 == 0 && base > 30)
+            base-=30;
+        // add apple power every 30 secs
+        if (timeCount % 600 == 0 && power < 100) {
+            power+=25;
+            [powerLabel setString:[NSString stringWithFormat:@"%i%%", power]];
+        }
+        
+        for (int i = 0; i < [baddies count]; i++) {
+            Baddie *currentBaddie = [baddies getBaddie:i];
+            int str = [currentBaddie getStrength];
+            //Bunker *nearestbunker = [bunkers getBunker:0];
+            if ([currentBaddie getStrength] ==0 || timeCount % 2 == 0) {
+                int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
+                if (NearestBunkerIndex < 0) {
+                    isEnd = true;
+                    flag = true;
+                }
+                else {
+                    Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
+                    
+                    int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
+                    int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
+                    double angle = atan2(yDiff, xDiff);
+                    
+                    CGPoint newPosition = ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle));
+                    if (!CGRectContainsPoint([nearestbunker getBoundingBox], newPosition)) {
+                        [currentBaddie setPosition:newPosition];
                     }
                     else {
-                        Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
-                        
-                        int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
-                        int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
-                        double angle = atan2(yDiff, xDiff);
-                        
-                        CGPoint newPosition = ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle));
-                        if (!CGRectContainsPoint([nearestbunker getBoundingBox], newPosition)) {
-                            [currentBaddie setPosition:newPosition];
+                        if ([currentBaddie isAttacking]) {
+                            //don't move
                         }
                         else {
-                            if ([currentBaddie isAttacking]) {
-                                //don't move
-                            }
-                            else {
-                                //move anyway and set attacking
-                                [currentBaddie setPosition:newPosition];
-                                [currentBaddie setAttacking:YES];
-                            }
+                            //move anyway and set attacking
+                            [currentBaddie setPosition:newPosition];
+                            [currentBaddie setAttacking:YES];
                         }
-                        
-                        if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
-                            if ([nearestbunker reduceHealth:str] <= 0) {
-                                [nearestbunker getBunker].visible = true;
-                                [baddies setAllAttacking:NO];
-                            }
+                    }
+                    
+                    if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
+                        if ([nearestbunker reduceHealth:str] <= 0) {
+                            [nearestbunker getBunker].visible = true;
+                            [baddies setAllAttacking:NO];
                         }
                     }
                 }
             }
         }
+    }
+    
+    else
+    {
+        while ([baddies count] > 0) {
+            int i = [baddies count] -1;
+            [baddies removeBaddie:[baddies getBaddie:i]];
+        }
+        while ([baddies count] < 20)
+            [baddies addBaddie :0:0];
         
-        else
-        {
-            while ([baddies count] > 0) {
-                int i = [baddies count] -1;
-                [baddies removeBaddie:[baddies getBaddie:i]];
+        for (int i = 0; i < [baddies count]; i++) {
+            Baddie *currentBaddie = [baddies getBaddie:i];
+            //all gone. game end. Empty the baddies.
+            if ((i / 10) == 1)
+            {
+                [currentBaddie reduceHealth];
+                [currentBaddie showHealth];
             }
-            while ([baddies count] < 20)
-                [baddies addBaddie :0:0];
-            
-            for (int i = 0; i < [baddies count]; i++) {
-                Baddie *currentBaddie = [baddies getBaddie:i];
-                //all gone. game end. Empty the baddies.
-                if ((i / 10) == 1)
-                {
-                    [currentBaddie reduceHealth];
-                    [currentBaddie showHealth];
-                }
-                switch (i) {
-                    case 0:
-                        [currentBaddie setPosition :ccp(40, 210)];
-                        break;
-                    case 1:
-                        [currentBaddie setPosition :ccp(30, 240)];
-                        break;
-                    case 2:
-                        [currentBaddie setPosition :ccp(40, 270)];
-                        break;
-                    case 3:
-                        [currentBaddie setPosition :ccp(70, 300)];
-                        break;
-                    case 4:
-                        [currentBaddie setPosition :ccp(130, 300)];
-                        break;
-                    case 5:
-                        [currentBaddie setPosition :ccp(130, 210)];
-                        break;
-                    case 6:
-                        [currentBaddie setPosition :ccp(130, 240)];
-                        break;
-                    case 7:
-                        [currentBaddie setPosition :ccp(100, 240)];
-                        break;
-                    case 8:
-                        [currentBaddie setPosition :ccp(110, 180)];
-                        break;
-                    case 9:
-                        [currentBaddie setPosition :ccp(70, 180)];
-                        break;
-                    case 10:
-                        [currentBaddie setPosition :ccp(200, 210)];
-                        break;
-                    case 11:
-                        [currentBaddie setPosition :ccp(190, 240)];
-                        break;
-                    case 12:
-                        [currentBaddie setPosition :ccp(200, 270)];
-                        break;
-                    case 13:
-                        [currentBaddie setPosition :ccp(230, 300)];
-                        break;
-                    case 14:
-                        [currentBaddie setPosition :ccp(290, 300)];
-                        break;
-                    case 15:
-                        [currentBaddie setPosition :ccp(290, 210)];
-                        break;
-                    case 16:
-                        [currentBaddie setPosition :ccp(290, 240)];
-                        break;
-                    case 17:
-                        [currentBaddie setPosition :ccp(260, 240)];
-                        break;
-                    case 18:
-                        [currentBaddie setPosition :ccp(270, 180)];
-                        break;
-                    case 19:
-                        [currentBaddie setPosition :ccp(230, 180)];
-                        break;
-                        
-                    default:
-                        break;
-                }
+            switch (i) {
+                case 0:
+                    [currentBaddie setPosition :ccp(40, 210)];
+                    break;
+                case 1:
+                    [currentBaddie setPosition :ccp(30, 240)];
+                    break;
+                case 2:
+                    [currentBaddie setPosition :ccp(40, 270)];
+                    break;
+                case 3:
+                    [currentBaddie setPosition :ccp(70, 300)];
+                    break;
+                case 4:
+                    [currentBaddie setPosition :ccp(130, 300)];
+                    break;
+                case 5:
+                    [currentBaddie setPosition :ccp(130, 210)];
+                    break;
+                case 6:
+                    [currentBaddie setPosition :ccp(130, 240)];
+                    break;
+                case 7:
+                    [currentBaddie setPosition :ccp(100, 240)];
+                    break;
+                case 8:
+                    [currentBaddie setPosition :ccp(110, 180)];
+                    break;
+                case 9:
+                    [currentBaddie setPosition :ccp(70, 180)];
+                    break;
+                case 10:
+                    [currentBaddie setPosition :ccp(200, 210)];
+                    break;
+                case 11:
+                    [currentBaddie setPosition :ccp(190, 240)];
+                    break;
+                case 12:
+                    [currentBaddie setPosition :ccp(200, 270)];
+                    break;
+                case 13:
+                    [currentBaddie setPosition :ccp(230, 300)];
+                    break;
+                case 14:
+                    [currentBaddie setPosition :ccp(290, 300)];
+                    break;
+                case 15:
+                    [currentBaddie setPosition :ccp(290, 210)];
+                    break;
+                case 16:
+                    [currentBaddie setPosition :ccp(290, 240)];
+                    break;
+                case 17:
+                    [currentBaddie setPosition :ccp(260, 240)];
+                    break;
+                case 18:
+                    [currentBaddie setPosition :ccp(270, 180)];
+                    break;
+                case 19:
+                    [currentBaddie setPosition :ccp(230, 180)];
+                    break;
+                    
+                default:
+                    break;
             }
-            if (flag) {
-                flag = false;
+        }
+        if (flag) {
+            flag = false;
             CCMenuItemFont  *item1 =
             [CCMenuItemFont itemFromString:@"Good Game!" target:self selector:@selector(onNewGame)];
             item1.position =ccp(0, -90);
             
             CCMenu *myMenu = [CCMenu menuWithItems: item1, nil];
             [self addChild: myMenu];
-            }
         }
+    }
     // } //flag if close
     // else flag = !flag;
 }
