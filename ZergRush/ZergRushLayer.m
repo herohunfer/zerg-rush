@@ -136,8 +136,8 @@ CCSprite *apple;
         
         //power label
         power = 100;
-        powerLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i %%", power] fontName:@"Helvetica Neue" fontSize:13];
-        powerLabel.position = ccp(240, 470);
+        powerLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i%%", power] fontName:@"Helvetica Neue" fontSize:13];
+        powerLabel.position = ccp(270, 470);
         [self addChild:powerLabel z:1];
         
         
