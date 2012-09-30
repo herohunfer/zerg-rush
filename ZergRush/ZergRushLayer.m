@@ -242,10 +242,14 @@ CCSprite *apple;
     // POWER STAGE
     if (activePower) {
         apple.position = ccp( apple.position.x, apple.position.y - 10);
-        if (apple.position.y < -32) {
-            while ([baddies count] > 0) {
-                int i = [baddies count] -1;
-                [baddies removeBaddie:[baddies getBaddie:i]];
+        if (apple.position.y < -32 ) {
+            if (!isEnd) {
+                while ([baddies count] > 0) {
+                    int i = [baddies count] -1;
+                    [baddies removeBaddie:[baddies getBaddie:i]];
+                    score++;
+                    [scoreLabel setString:[NSString stringWithFormat:@"Zerglings killed: %i", score]];
+                }
             }
             [self removeChild:apple cleanup:YES];
             activePower = false;
@@ -265,7 +269,7 @@ CCSprite *apple;
         if (timeCount % 600 == 0 && base > 30)
             base-=30;
         // add apple power every 30 secs
-        if (timeCount % 600 == 0 && power < 100) {
+        if (timeCount % 1800 == 0 && power < 100) {
             power+=25;
             [powerLabel setString:[NSString stringWithFormat:@"%i%%", power]];
         }
