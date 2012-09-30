@@ -194,7 +194,7 @@ CCSprite *apple;
     isEnd = false;
     timeCount = -1;
     base = 180;
-    bossBase = 300;
+    bossBase = 600;
     flag = false;
     score = 0;
     activePower = false;
