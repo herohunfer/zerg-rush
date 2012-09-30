@@ -7,7 +7,7 @@
 //
 
 #import "MenuLayer.h"
-#import "ZergRushLayer.h"
+#import "PrepareLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -35,7 +35,7 @@ CCSprite *apple;
 
 -(void) onNewGame {
     NSLog(@"on play");
-    [[CCDirector sharedDirector] replaceScene:[ZergRushLayer scene]];
+    [[CCDirector sharedDirector] replaceScene:[PrepareLayer scene]];
 }
 -(BOOL)hasRetinaDisplay
 {
