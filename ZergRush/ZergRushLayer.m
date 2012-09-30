@@ -13,6 +13,7 @@
 #import "Bunkers.h"
 #import "IntroLayer.h"
 #import "MenuLayer.h"
+#import "CCLabelTTF.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -101,6 +102,12 @@ Boolean flag = false;
         // schedule a repeating callback on every frame
         [self schedule:@selector(nextFrame:)];
         
+        //score label
+        score = 0;
+        scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Zerglings killed: %i", score] fontName:@"Helvetica Neue" fontSize:13];
+        scoreLabel.position = ccp(165, 470);
+        [self addChild:scoreLabel z:1];
+        
         self.isTouchEnabled = YES;
         
         // for the end of game
@@ -132,6 +139,8 @@ Boolean flag = false;
             //bunker.visible = NO; //Make your sprite invisible
             if ([baddie reduceHealth] <= 0)
             {
+                score++;
+                [scoreLabel setString:[NSString stringWithFormat:@"Zerglings killed: %i", score]];
                 int str = [baddie getStrength];
                 if (str == 1) {
                     CGPoint pos = [baddie getPosition];
@@ -183,6 +192,11 @@ Boolean flag = false;
         return YES;
     else
         return NO;
+}
+
+-(void) setScoreString {
+    [scoreString setString:@"Zerglings killed: "];
+    [scoreString appendString:[[NSNumber numberWithInt:score] stringValue]];
 }
 
 - (void) nextFrame:(ccTime)dt {

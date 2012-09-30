@@ -10,6 +10,9 @@
 
 @interface Bunker : CCNode {
     CCSprite *bunker;
+    CCSprite *healthBarBorder;
+    CCSprite *healthBar;
+    int maxHealth;
     int health;
 }
 
@@ -23,5 +26,5 @@
 -(int) getWhichSideOfBunker:(CGPoint) p;
 -(CCSprite*) getBunker;
 -(int) reduceHealth:(int) str;
-
+-(void) updateHealthBar;
 @end
