@@ -6,6 +6,10 @@
     if ((self = [super init])) {
         baddie = [CCSprite spriteWithFile: @"baddie.png"];
         baddie.position = ccp(xcoord, ycoord);
+        if ([self hasRetinaDisplay]) {
+            baddie.scaleX = 2.0;
+            baddie.scaleY = 2.0;
+        }
         [self addChild:baddie];
         if (str == 1) health = 4;
         else health = 2;
@@ -16,11 +20,15 @@
     }
     return self;
 }
-/*
--(id) findTarget: {
 
+-(BOOL)hasRetinaDisplay
+{
+    // checks for iPhone 4. will return a false positive on iPads, so use the above function in conjunction with this to determine if it's a 3GS or below, or an iPhone 4.
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2)
+        return YES;
+    else
+        return NO;
 }
- */
 
 -(boolean_t) isAtPointOfEntry {
     if (pointOfEntry.x == CGFLOAT_MIN && pointOfEntry.y == CGFLOAT_MIN)
@@ -111,8 +119,14 @@
 }
 -(void) setStrength:(int) str {
     if (str == 1) {
-        baddie.scaleX = 3;
-        baddie.scaleY = 3;
+        if ([self hasRetinaDisplay]) {
+            baddie.scaleX = 6;
+            baddie.scaleY = 6;
+        }
+        else {
+            baddie.scaleX = 3;
+            baddie.scaleY = 3;
+        }
     }
 }
 -(int) getStrength {
