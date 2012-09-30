@@ -24,7 +24,7 @@
         }
         [self addChild:bunker];
         
-        maxHealth = 60; // 60 fps * 5 baddies * 2 seconds for debug using 60, otherwise 600
+        maxHealth = 300; // 60 fps * 5 baddies * 2 seconds for debug using 60, otherwise 600
         health = maxHealth;
         
         //health bar

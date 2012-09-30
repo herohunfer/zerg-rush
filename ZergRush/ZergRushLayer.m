@@ -28,6 +28,8 @@ int timeCount = -1;
 int base = 180;
 int bossBase = 300;
 Boolean flag = false;
+Boolean activePower = false;
+CCSprite *apple;
 
 // ZergRushLayer implementation
 @implementation ZergRushLayer
@@ -48,29 +50,36 @@ Boolean flag = false;
 	return scene;
 }
 
-// on "init" you need to initialize your instance
-/*
--(void) onEnter
-{
-	[super onEnter];
-    
+
+
+-(void) onPower {
+    NSLog(@"on power");
+    if (power > 0 && !activePower) {
+        power -= 25;
+        [powerLabel setString:[NSString stringWithFormat:@"%i", power]];
+        
+        apple = [CCSprite spriteWithFile: @"apple.png"];
+        apple.position = ccp( 160, 480 );
+        apple.scaleX = 2;
+        apple.scaleY = 2;
+        [self addChild:apple];
+        activePower =true;
+    }
     
     
 }
- */
+
+
+
+// on "init" you need to initialize your instance
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        //background
         CCSprite *background;
         CGSize size = [[CCDirector sharedDirector] winSize];
-        /*
-        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-            background = [CCSprite spriteWithFile:@"photo.PNG"];
-            background.rotation = 90;
-        } else {
-         */
         if ([self hasRetinaDisplay]) {
             background = [CCSprite spriteWithFile:@"photo.PNG"];
         }
@@ -82,6 +91,17 @@ Boolean flag = false;
         
         // add the label as a child to this Layer
         [self addChild: background];
+        
+        activePower = false;
+        
+        // power menu
+        CCMenuItemFont  *item1 =
+        [CCMenuItemFont itemFromString:@"xxx" target:self selector:@selector(onPower)];
+        item1.position = ccp(310-160, 470-240);
+        // item1.opacity = 100;
+        CCMenu *myMenu = [CCMenu menuWithItems: item1, nil];
+        [self addChild: myMenu];
+        
         
         
         //draw bunkers
@@ -105,6 +125,13 @@ Boolean flag = false;
         scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Zerglings killed: %i", score] fontName:@"Helvetica Neue" fontSize:13];
         scoreLabel.position = ccp(165, 470);
         [self addChild:scoreLabel z:1];
+        
+        //power label
+        power = 75;
+        powerLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", power] fontName:@"Helvetica Neue" fontSize:13];
+        powerLabel.position = ccp(265, 470);
+        [self addChild:powerLabel z:1];
+        
         
         self.isTouchEnabled = YES;
         
@@ -167,9 +194,10 @@ Boolean flag = false;
     isEnd = false;
     timeCount = -1;
     base = 180;
-    bossBase = 300;
+    bossBase = 600;
     flag = false;
     score = 0;
+    activePower = false;
 }
 
 #pragma mark GameKit delegate
@@ -218,7 +246,23 @@ Boolean flag = false;
         
         if (timeCount % 600 == 0 && base > 30)
             base-=30;
-        
+    // add apple power every 30 secs
+    if (timeCount % 600 == 0 && power < 100) {
+        power+=25;
+        [powerLabel setString:[NSString stringWithFormat:@"%i", power]];
+    }
+        // POWER STAGE
+    if (activePower) {
+        apple.position = ccp( apple.position.x, apple.position.y - 10);
+        if (apple.position.y < -32) {
+            while ([baddies count] > 0) {
+                int i = [baddies count] -1;
+                [baddies removeBaddie:[baddies getBaddie:i]];
+            }
+            [self removeChild:apple cleanup:YES];
+            activePower = false;
+        }
+    }
         // loop through all the baddies
         if (!isEnd)
         {
