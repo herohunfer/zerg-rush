@@ -50,7 +50,6 @@ CCSprite *apple;
 {
     if ((self = [super initWithColor:ccc4(0, 0, 0, 0)])) {
         
-        // CCLabelTTF *titleLeft = [CCLabelTTF labelWithString:@"Menu " fontName:@"Marker Felt" fontSize:48];
         CCMenuItemFont  *item1 =
         [CCMenuItemFont itemFromString:@"Start Game" target:self selector:@selector(onNewGame)];
         

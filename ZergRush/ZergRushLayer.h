@@ -16,8 +16,11 @@
 @interface ZergRushLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
     int score;
+    int power;
     NSMutableString* scoreString;
     CCLabelTTF* scoreLabel;
+    NSMutableString* powerString;
+    CCLabelTTF* powerLabel;
 }
 
 // returns a CCScene that contains the ZergRushLayer as the only child
