@@ -45,13 +45,14 @@
 	CGSize size = [[CCDirector sharedDirector] winSize];
 
 	CCSprite *background;
-    
+    /*
 	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-		background = [CCSprite spriteWithFile:@"intro.jpeg"];
+		background = [CCSprite spriteWithFile:@"Default.png"];
 		background.rotation = 90;
 	} else {
-		background = [CCSprite spriteWithFile:@"intro.jpeg"];
-	}
+     */
+		background = [CCSprite spriteWithFile:@"Default.png"];
+	// }
 	background.position = ccp(size.width/2, size.height/2);
 	// add the label as a child to this Layer
 	[self addChild: background];
