@@ -259,57 +259,60 @@ CCSprite *apple;
     if (!isEnd)
     {
         timeCount++;
-        if (timeCount % base == 0) {
-            [baddies addBaddie:((timeCount / base) % 6 / 3) :0]; // 3 per direction
-        }
-        if (timeCount % bossBase == 0) {
-            [baddies addBaddie:((timeCount / bossBase) % 2) :1]; // 3 per direction
-        }
         
-        if (timeCount % 600 == 0 && base > 30)
-            base-=30;
-        // add apple power every 30 secs
-        if (timeCount % 1800 == 0 && power < 100) {
-            power+=25;
-            [powerLabel setString:[NSString stringWithFormat:@"%i%%", power]];
-        }
-        
-        for (int i = 0; i < [baddies count]; i++) {
-            Baddie *currentBaddie = [baddies getBaddie:i];
-            int str = [currentBaddie getStrength];
-            //Bunker *nearestbunker = [bunkers getBunker:0];
-            if ([currentBaddie getStrength] ==0 || timeCount % 2 == 0) {
-                int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
-                if (NearestBunkerIndex < 0) {
-                    isEnd = true;
-                    flag = true;
-                }
-                else {
-                    Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
-                    
-                    int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
-                    int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
-                    double angle = atan2(yDiff, xDiff);
-                    
-                    CGPoint newPosition = ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle));
-                    if (!CGRectContainsPoint([nearestbunker getBoundingBox], newPosition)) {
-                        [currentBaddie setPosition:newPosition];
+        if (timeCount > 10) {
+            if (timeCount % base == 0) {
+                [baddies addBaddie:((timeCount / base) % 6 / 3) :0]; // 3 per direction
+            }
+            if (timeCount % bossBase == 0) {
+                [baddies addBaddie:((timeCount / bossBase) % 2) :1]; // 3 per direction
+            }
+            
+            if (timeCount % 600 == 0 && base > 30)
+                base-=30;
+            // add apple power every 30 secs
+            if (timeCount % 1800 == 0 && power < 100) {
+                power+=25;
+                [powerLabel setString:[NSString stringWithFormat:@"%i%%", power]];
+            }
+            
+            for (int i = 0; i < [baddies count]; i++) {
+                Baddie *currentBaddie = [baddies getBaddie:i];
+                int str = [currentBaddie getStrength];
+                //Bunker *nearestbunker = [bunkers getBunker:0];
+                if ([currentBaddie getStrength] ==0 || timeCount % 2 == 0) {
+                    int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
+                    if (NearestBunkerIndex < 0) {
+                        isEnd = true;
+                        flag = true;
                     }
                     else {
-                        if ([currentBaddie isAttacking]) {
-                            //don't move
+                        Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
+                        
+                        int xDiff = ([nearestbunker getx]) - [currentBaddie getx];
+                        int yDiff = ([nearestbunker gety]) - [currentBaddie gety];
+                        double angle = atan2(yDiff, xDiff);
+                        
+                        CGPoint newPosition = ccp([currentBaddie getx]+2*cos(angle),[currentBaddie gety]+2*sin(angle));
+                        if (!CGRectContainsPoint([nearestbunker getBoundingBox], newPosition)) {
+                            [currentBaddie setPosition:newPosition];
                         }
                         else {
-                            //move anyway and set attacking
-                            [currentBaddie setPosition:newPosition];
-                            [currentBaddie setAttacking:YES];
+                            if ([currentBaddie isAttacking]) {
+                                //don't move
+                            }
+                            else {
+                                //move anyway and set attacking
+                                [currentBaddie setPosition:newPosition];
+                                [currentBaddie setAttacking:YES];
+                            }
                         }
-                    }
-                    
-                    if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
-                        if ([nearestbunker reduceHealth:str] <= 0) {
-                            [nearestbunker getBunker].visible = true;
-                            [baddies setAllAttacking:NO];
+                        
+                        if ([currentBaddie hasReachedTarget:nearestbunker] == true) {
+                            if ([nearestbunker reduceHealth:str] <= 0) {
+                                [nearestbunker getBunker].visible = true;
+                                [baddies setAllAttacking:NO];
+                            }
                         }
                     }
                 }
