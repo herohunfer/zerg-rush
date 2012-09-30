@@ -12,5 +12,7 @@
 -(void) removeBaddie: (id) baddie;
 -(Baddie *) getBaddie: (int) index;
 -(void) replace:(int) i: (Baddie*) newbaddie;
+-(void) addBaddieWithPosition:(int)xCoor :(int)yCoor :(int)str;
 -(void) setAllAttacking:(boolean_t) attacking;
+
 @end

@@ -131,10 +131,16 @@ int bossBase = 300;
         if (CGRectContainsPoint([baddie getBoundingBox], ccPos)) //Method to check if a rectangle contains a point
         {
             //bunker.visible = NO; //Make your sprite invisible
-            if ([baddie reduceHealth] <= 0) {
-                //kill
+            if ([baddie reduceHealth] <= 0)
+            {
                 score++;
                 [scoreLabel setString:[NSString stringWithFormat:@"Zerglings killed: %i", score]];
+                int str = [baddie getStrength];
+                if (str == 1) {
+                    CGPoint pos = [baddie getPosition];
+                    [baddies addBaddieWithPosition:(pos.x - 30) :(pos.y-10) :0];
+                    [baddies addBaddieWithPosition:(pos.x + 30) :(pos.y+10) :0];
+                }
                 [baddies removeBaddie:baddie];
             }
             else [baddie showHealth];
