@@ -10,6 +10,9 @@
 // Import the interfaces
 #import "IntroLayer.h"
 #import "ZergRushLayer.h"
+#import "CCTouchDispatcher.h"
+#import "cocos2d.h"
+#import "MenuLayer.h"
 
 
 #pragma mark - IntroLayer
@@ -42,24 +45,35 @@
 	CGSize size = [[CCDirector sharedDirector] winSize];
 
 	CCSprite *background;
-	
+    
 	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-		background = [CCSprite spriteWithFile:@"Default.png"];
+		background = [CCSprite spriteWithFile:@"intro.jpeg"];
 		background.rotation = 90;
 	} else {
-		background = [CCSprite spriteWithFile:@"Default-Landscape~ipad.png"];
+		background = [CCSprite spriteWithFile:@"intro.jpeg"];
 	}
 	background.position = ccp(size.width/2, size.height/2);
-
 	// add the label as a child to this Layer
 	[self addChild: background];
 	
 	// In one second transition to the new scene
-	[self scheduleOnce:@selector(makeTransition:) delay:1];
+	 [self scheduleOnce:@selector(makeTransition:) delay:1];
 }
+
+-(id) init
+{
+	// always call "super" init
+	// Apple recommends to re-assign "self" with the "super" return value
+	if( (self=[super init] )) {
+        
+        return self;
+	}
+	return nil;
+}
+
 
 -(void) makeTransition:(ccTime)dt
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[ZergRushLayer scene] withColor:ccWHITE]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MenuLayer scene] withColor:ccWHITE]];
 }
 @end

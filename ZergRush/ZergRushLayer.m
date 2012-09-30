@@ -11,6 +11,8 @@
 #import "ZergRushLayer.h"
 #import "Baddies.h"
 #import "Bunkers.h"
+#import "IntroLayer.h"
+#import "MenuLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -25,6 +27,7 @@ Boolean isEnd = false;
 int timeCount = -1;
 int base = 180;
 int bossBase = 300;
+Boolean flag = false;
 // Boolean flag; //not work well
 
 // ZergRushLayer implementation
@@ -99,6 +102,9 @@ int bossBase = 300;
         [self schedule:@selector(nextFrame:)];
         
         self.isTouchEnabled = YES;
+        
+        // for the end of game
+        
 	}
 	return self;
 }
@@ -149,6 +155,11 @@ int bossBase = 300;
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];
+    isEnd = false;
+    timeCount = -1;
+    base = 180;
+    bossBase = 300;
+    flag = false;
 }
 
 #pragma mark GameKit delegate
@@ -201,8 +212,10 @@ int bossBase = 300;
                 //Bunker *nearestbunker = [bunkers getBunker:0];
                 if ([currentBaddie getStrength] ==0 || timeCount % 2 == 0) {
                     int NearestBunkerIndex = [currentBaddie getNearestBunker:bunkers];
-                    if (NearestBunkerIndex < 0)
+                    if (NearestBunkerIndex < 0) {
                         isEnd = true;
+                        flag = true;
+                    }
                     else {
                         Bunker *nearestbunker = [bunkers getBunker:NearestBunkerIndex];
                         
@@ -319,8 +332,21 @@ int bossBase = 300;
                         break;
                 }
             }
+            if (flag) {
+                flag = false;
+            CCMenuItemFont  *item1 =
+            [CCMenuItemFont itemFromString:@"Good Game!" target:self selector:@selector(onNewGame)];
+            item1.position =ccp(0, -120);
+            
+            CCMenu *myMenu = [CCMenu menuWithItems: item1, nil];
+            [self addChild: myMenu];
+            }
         }
     // } //flag if close
     // else flag = !flag;
+}
+-(void) onNewGame {
+    NSLog(@"on replay");
+    [[CCDirector sharedDirector] replaceScene:[MenuLayer scene]];
 }
 @end
