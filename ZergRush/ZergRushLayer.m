@@ -11,6 +11,7 @@
 #import "ZergRushLayer.h"
 #import "Baddies.h"
 #import "Bunkers.h"
+#import "CCLabelTTF.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -98,6 +99,12 @@ int bossBase = 300;
         // schedule a repeating callback on every frame
         [self schedule:@selector(nextFrame:)];
         
+        //score label
+        score = 0;
+        scoreLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Zerglings killed: %i", score] fontName:@"Helvetica Neue" fontSize:13];
+        scoreLabel.position = ccp(165, 470);
+        [self addChild:scoreLabel z:1];
+        
         self.isTouchEnabled = YES;
 	}
 	return self;
@@ -124,8 +131,12 @@ int bossBase = 300;
         if (CGRectContainsPoint([baddie getBoundingBox], ccPos)) //Method to check if a rectangle contains a point
         {
             //bunker.visible = NO; //Make your sprite invisible
-            if ([baddie reduceHealth] <= 0)
+            if ([baddie reduceHealth] <= 0) {
+                //kill
+                score++;
+                [scoreLabel setString:[NSString stringWithFormat:@"Zerglings killed: %i", score]];
                 [baddies removeBaddie:baddie];
+            }
             else [baddie showHealth];
             // break;
         }
@@ -164,6 +175,11 @@ int bossBase = 300;
         return YES;
     else
         return NO;
+}
+
+-(void) setScoreString {
+    [scoreString setString:@"Zerglings killed: "];
+    [scoreString appendString:[[NSNumber numberWithInt:score] stringValue]];
 }
 
 - (void) nextFrame:(ccTime)dt {
