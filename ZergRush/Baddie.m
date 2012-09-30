@@ -12,6 +12,7 @@
         strength = str;
         [self setStrength :str];
         isAttacking = NO;
+        pointOfEntry = ccp(CGFLOAT_MIN,CGFLOAT_MIN);
     }
     return self;
 }
@@ -20,6 +21,29 @@
 
 }
  */
+
+-(boolean_t) isAtPointOfEntry {
+    if (pointOfEntry.x == CGFLOAT_MIN && pointOfEntry.y == CGFLOAT_MIN)
+        return YES;
+    else
+        return NO;
+}
+
+-(void) setPointOfEntry {
+    pointOfEntry = ccp([self getx], [self gety]);
+}
+
+-(void) setPointOfEntryToNull {
+    pointOfEntry = ccp(CGFLOAT_MIN, CGFLOAT_MIN);
+}
+
+-(int) getPointOfEntryX {
+    return pointOfEntry.x;
+}
+
+-(int) getPointOfEntryY {
+    return pointOfEntry.y;
+}
 
 -(boolean_t) hasReachedTarget: (Bunker*) target {
     return CGRectContainsPoint([target getBoundingBox], [baddie position]);

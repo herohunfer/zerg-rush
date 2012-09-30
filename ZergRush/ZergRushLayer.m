@@ -299,7 +299,15 @@ CCSprite *apple;
                         }
                         else {
                             if ([currentBaddie isAttacking]) {
-                                //don't move
+                                if ([currentBaddie isAtPointOfEntry]) {
+                                    [currentBaddie setPointOfEntry];
+                                    [currentBaddie setPosition:newPosition];
+                                }
+                                else {
+                                    newPosition = ccp([currentBaddie getPointOfEntryX], [currentBaddie getPointOfEntryY]);
+                                    [currentBaddie setPointOfEntryToNull];
+                                    [currentBaddie setPosition:newPosition];
+                                }
                             }
                             else {
                                 //move anyway and set attacking
@@ -312,6 +320,7 @@ CCSprite *apple;
                             if ([nearestbunker reduceHealth:str] <= 0) {
                                 [nearestbunker getBunker].visible = true;
                                 [baddies setAllAttacking:NO];
+                                [baddies setPointOfEntryToNullForBunker:nearestbunker];
                             }
                         }
                     }

@@ -6,6 +6,7 @@
     int health;
     int strength;  // 0 for minon, 1 for boss
     boolean_t isAttacking;
+    CGPoint pointOfEntry;
 }
 
 -(id) init:(int) xcoord:(int) ycoord :(int) str;
@@ -22,4 +23,9 @@
 -(int) getStrength;
 -(boolean_t) isAttacking;
 -(void) setAttacking:(boolean_t) attacking;
+-(boolean_t) isAtPointOfEntry;
+-(void) setPointOfEntry;
+-(void) setPointOfEntryToNull;
+-(int) getPointOfEntryX;
+-(int) getPointOfEntryY;
 @end

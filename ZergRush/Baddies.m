@@ -73,4 +73,13 @@
     }
 }
 
+-(void) setPointOfEntryToNullForBunker:(Bunker *) bunker {
+    for (int i=0; i < [baddies count]; i++) {
+        Baddie *baddie = [baddies objectAtIndex:i];
+        if (CGRectContainsPoint([bunker getBoundingBox], [baddie getPosition])) {
+            [baddie setPointOfEntryToNull];
+        }
+    }
+}
+
 @end
