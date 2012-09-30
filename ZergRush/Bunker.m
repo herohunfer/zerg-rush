@@ -23,7 +23,22 @@
             bunker.scaleY = 0.55;
         }
         [self addChild:bunker];
-        health = 60; // 60 fps * 5 baddies * 2 seconds for debug using 60, otherwise 600
+        
+        maxHealth = 60; // 60 fps * 5 baddies * 2 seconds for debug using 60, otherwise 600
+        health = maxHealth;
+        
+        //health bar
+        healthBarBorder = [CCSprite spriteWithFile:@"progressbarborder.png"];
+        healthBarBorder.scaleX = 0.45;
+        healthBarBorder.scaleY = 0.45;
+        [healthBarBorder setPosition:ccp(xcoord, ycoord-18)];
+        [self addChild: healthBarBorder z:2];
+        
+        healthBar = [CCSprite spriteWithFile:@"progressbar.png"];
+        healthBar.scaleX = 1;
+        [healthBar setAnchorPoint:ccp(0, 0)];
+        [healthBar setPosition:ccp(0, 0)];
+        [healthBarBorder addChild: healthBar z:1];
     }
     return self;
 }
@@ -50,9 +65,15 @@
 }
 -(int) reduceHealth:(int) str{
     if (str ==0) {
-        return --health;
+        --health;
+        [self updateHealthBar];
+        return health;
     }
-    return (health-=2);
+    else {
+        health -= 2;
+        [self updateHealthBar];
+        return health;
+    }
 }
 
 -(BOOL)hasRetinaDisplay
@@ -91,4 +112,10 @@
         return 2;
     }
 }
+
+-(void) updateHealthBar {
+    float healthRatio = (float)health/(float)maxHealth;
+    healthBar.scaleX = healthRatio;
+}
+
 @end
