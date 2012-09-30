@@ -13,7 +13,6 @@
 #import "Bunkers.h"
 #import "IntroLayer.h"
 #import "MenuLayer.h"
-#import "CCLabelTTF.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -29,7 +28,6 @@ int timeCount = -1;
 int base = 180;
 int bossBase = 300;
 Boolean flag = false;
-// Boolean flag; //not work well
 
 // ZergRushLayer implementation
 @implementation ZergRushLayer
@@ -129,7 +127,8 @@ Boolean flag = false;
     NSSet *allTouches = [event allTouches]; //Get all the current touches in the event
     UITouch *aTouch = [allTouches anyObject]; //Get one of the touches, multitouch is disabled, so there is only always going to be one.
     CGPoint pos = [aTouch locationInView:touch.view]; //Get the location of the touch
-    CGPoint ccPos = [[CCDirector sharedDirector] convertToGL:pos]; //Convert that location to something cocos2d can use
+    CGPoint ccPos = [[CCDirector sharedDirector] convertToGL:pos];
+    //Convert that location to something cocos2d can use
     
     //check all baddies
     for (int i=0; i < [baddies count]; i++) {
@@ -149,7 +148,7 @@ Boolean flag = false;
                 }
                 [baddies removeBaddie:baddie];
             }
-            else [baddie showHealth];
+            else [baddie showHealth];    //change the color of the baddies
             // break;
         }
     }
@@ -164,11 +163,13 @@ Boolean flag = false;
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];
+    //reset all the attributes
     isEnd = false;
     timeCount = -1;
     base = 180;
     bossBase = 300;
     flag = false;
+    score = 0;
 }
 
 #pragma mark GameKit delegate
@@ -193,11 +194,12 @@ Boolean flag = false;
     else
         return NO;
 }
-
+/*
 -(void) setScoreString {
     [scoreString setString:@"Zerglings killed: "];
     [scoreString appendString:[[NSNumber numberWithInt:score] stringValue]];
 }
+ */
 
 - (void) nextFrame:(ccTime)dt {
     /*
@@ -350,7 +352,7 @@ Boolean flag = false;
                 flag = false;
             CCMenuItemFont  *item1 =
             [CCMenuItemFont itemFromString:@"Good Game!" target:self selector:@selector(onNewGame)];
-            item1.position =ccp(0, -120);
+            item1.position =ccp(0, -90);
             
             CCMenu *myMenu = [CCMenu menuWithItems: item1, nil];
             [self addChild: myMenu];

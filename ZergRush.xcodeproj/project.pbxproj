@@ -138,10 +138,18 @@
 		7984EA4C1616A82800A69113 /* Baddies.m in Sources */ = {isa = PBXBuildFile; fileRef = 7984EA4B1616A82800A69113 /* Baddies.m */; };
 		7984EA4F1616AD8900A69113 /* Bunkers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7984EA4E1616AD8900A69113 /* Bunkers.m */; };
 		79C8228B161673BD00C3FF31 /* seeker.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C8228A161673BD00C3FF31 /* seeker.png */; };
+		840137AD1617AC1200D6AB55 /* photo-lowres.png in Resources */ = {isa = PBXBuildFile; fileRef = 840137AC1617AC1200D6AB55 /* photo-lowres.png */; };
 		844B25BE1617889C00880693 /* baddie.png in Resources */ = {isa = PBXBuildFile; fileRef = 844B25BB1617889A00880693 /* baddie.png */; };
 		844B25BF1617889C00880693 /* photo.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 844B25BC1617889A00880693 /* photo.PNG */; };
 		844B25C01617889C00880693 /* yellowBaddie.png in Resources */ = {isa = PBXBuildFile; fileRef = 844B25BD1617889B00880693 /* yellowBaddie.png */; };
-		844B25C2161788FA00880693 /* bunker.png in Resources */ = {isa = PBXBuildFile; fileRef = 844B25C1161788FA00880693 /* bunker.png */; };
+		84F1069716188B2A00D1EBEA /* progressbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F1069516188B2A00D1EBEA /* progressbar.png */; };
+		84F1069816188B2A00D1EBEA /* progressbarborder.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F1069616188B2A00D1EBEA /* progressbarborder.png */; };
+		84F1069B1618909600D1EBEA /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F1069A1618909600D1EBEA /* apple.png */; };
+		84F1069D1618975B00D1EBEA /* zerg.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F1069C1618975B00D1EBEA /* zerg.png */; };
+		84F49CFC1617D040000E84DE /* intro.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 84F49CFB1617D040000E84DE /* intro.jpeg */; };
+		84F49D0B1617E0BC000E84DE /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F49D0A1617E0BC000E84DE /* MenuLayer.m */; };
+		84F49D161617FC45000E84DE /* BlackIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F49D151617FC45000E84DE /* BlackIcon@2x.png */; };
+		84F49D181617FC4A000E84DE /* bunker.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F49D171617FC4A000E84DE /* bunker.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -416,10 +424,19 @@
 		7984EA4D1616AD8300A69113 /* Bunkers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunkers.h; sourceTree = "<group>"; };
 		7984EA4E1616AD8900A69113 /* Bunkers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bunkers.m; sourceTree = "<group>"; };
 		79C8228A161673BD00C3FF31 /* seeker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seeker.png; path = Resources/seeker.png; sourceTree = "<group>"; };
+		840137AC1617AC1200D6AB55 /* photo-lowres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "photo-lowres.png"; path = "Resources/photo-lowres.png"; sourceTree = "<group>"; };
 		844B25BB1617889A00880693 /* baddie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = baddie.png; path = Resources/baddie.png; sourceTree = "<group>"; };
 		844B25BC1617889A00880693 /* photo.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo.PNG; path = Resources/photo.PNG; sourceTree = "<group>"; };
 		844B25BD1617889B00880693 /* yellowBaddie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowBaddie.png; path = Resources/yellowBaddie.png; sourceTree = "<group>"; };
-		844B25C1161788FA00880693 /* bunker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bunker.png; sourceTree = "<group>"; };
+		84F1069516188B2A00D1EBEA /* progressbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = progressbar.png; path = Resources/progressbar.png; sourceTree = "<group>"; };
+		84F1069616188B2A00D1EBEA /* progressbarborder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = progressbarborder.png; path = Resources/progressbarborder.png; sourceTree = "<group>"; };
+		84F1069A1618909600D1EBEA /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple.png; path = Resources/apple.png; sourceTree = "<group>"; };
+		84F1069C1618975B00D1EBEA /* zerg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zerg.png; path = Resources/zerg.png; sourceTree = "<group>"; };
+		84F49CFB1617D040000E84DE /* intro.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = intro.jpeg; path = Resources/intro.jpeg; sourceTree = "<group>"; };
+		84F49D091617E0BC000E84DE /* MenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLayer.h; sourceTree = "<group>"; };
+		84F49D0A1617E0BC000E84DE /* MenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
+		84F49D151617FC45000E84DE /* BlackIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlackIcon@2x.png"; path = "Resources/BlackIcon@2x.png"; sourceTree = "<group>"; };
+		84F49D171617FC4A000E84DE /* bunker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bunker.png; path = Resources/bunker.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +495,8 @@
 		7943CC3916166686002A723C /* ZergRush */ = {
 			isa = PBXGroup;
 			children = (
+				84F49D091617E0BC000E84DE /* MenuLayer.h */,
+				84F49D0A1617E0BC000E84DE /* MenuLayer.m */,
 				7924BB881616C838002D7ABF /* Baddie.h */,
 				7924BB891616C838002D7ABF /* Baddie.m */,
 				7924BB8A1616C838002D7ABF /* Bunker.h */,
@@ -488,10 +507,10 @@
 				7984EA4B1616A82800A69113 /* Baddies.m */,
 				7984EA40161690BC00A69113 /* ZergRushLayer.m */,
 				7943CDB816166689002A723C /* IntroLayer.m */,
+				7943CDB716166689002A723C /* IntroLayer.h */,
 				7984EA42161690C400A69113 /* ZergRushLayer.h */,
 				7943CDB116166689002A723C /* AppDelegate.h */,
 				7943CDB216166689002A723C /* AppDelegate.m */,
-				7943CDB716166689002A723C /* IntroLayer.h */,
 				7943CC3A16166686002A723C /* Resources */,
 				7943CC5416166686002A723C /* libs */,
 				7943CDAD16166689002A723C /* Supporting Files */,
@@ -504,13 +523,20 @@
 			children = (
 				79C8228A161673BD00C3FF31 /* seeker.png */,
 				7943CC3B16166686002A723C /* Default.png */,
+				84F1069A1618909600D1EBEA /* apple.png */,
+				84F1069C1618975B00D1EBEA /* zerg.png */,
+				840137AC1617AC1200D6AB55 /* photo-lowres.png */,
 				7943CC3D16166686002A723C /* Default-Landscape~ipad.png */,
+				84F1069516188B2A00D1EBEA /* progressbar.png */,
+				84F1069616188B2A00D1EBEA /* progressbarborder.png */,
 				7943CC3F16166686002A723C /* fps_images.png */,
 				844B25BB1617889A00880693 /* baddie.png */,
 				844B25BC1617889A00880693 /* photo.PNG */,
 				844B25BD1617889B00880693 /* yellowBaddie.png */,
+				84F49D151617FC45000E84DE /* BlackIcon@2x.png */,
+				84F49D171617FC4A000E84DE /* bunker.png */,
 				7943CC4116166686002A723C /* fps_images-hd.png */,
-				844B25C1161788FA00880693 /* bunker.png */,
+				84F49CFB1617D040000E84DE /* intro.jpeg */,
 				7943CC4316166686002A723C /* fps_images-ipadhd.png */,
 				7943CC4516166686002A723C /* Icon-72.png */,
 				7943CC4716166686002A723C /* Icon-Small-50.png */,
@@ -934,7 +960,14 @@
 				844B25BE1617889C00880693 /* baddie.png in Resources */,
 				844B25BF1617889C00880693 /* photo.PNG in Resources */,
 				844B25C01617889C00880693 /* yellowBaddie.png in Resources */,
-				844B25C2161788FA00880693 /* bunker.png in Resources */,
+				840137AD1617AC1200D6AB55 /* photo-lowres.png in Resources */,
+				84F49CFC1617D040000E84DE /* intro.jpeg in Resources */,
+				84F49D161617FC45000E84DE /* BlackIcon@2x.png in Resources */,
+				84F49D181617FC4A000E84DE /* bunker.png in Resources */,
+				84F1069716188B2A00D1EBEA /* progressbar.png in Resources */,
+				84F1069816188B2A00D1EBEA /* progressbarborder.png in Resources */,
+				84F1069B1618909600D1EBEA /* apple.png in Resources */,
+				84F1069D1618975B00D1EBEA /* zerg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1086,7 @@
 				7984EA4F1616AD8900A69113 /* Bunkers.m in Sources */,
 				7924BB8C1616C838002D7ABF /* Baddie.m in Sources */,
 				7924BB8D1616C838002D7ABF /* Bunker.m in Sources */,
+				84F49D0B1617E0BC000E84DE /* MenuLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
